@@ -28,10 +28,9 @@ auth.lock
 # Purchase-team skills and vendor playbooks are local-only trade secrets.
 workspace-ss-purchase-*/skills/*
 !workspace-ss-purchase-*/skills/.gitkeep
-**/*loaded*
-**/*yuplay*
-**/*gmg*
 **/*vendor*
+**/*playbook*
+**/*purchase-data*
 
 # OS artifacts
 .DS_Store
