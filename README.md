@@ -74,7 +74,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
     <tr>
       <td width="50%" valign="top">
         <strong>공개 아키텍처</strong><br>
-        <sub>직원 역할·권한·인계·상태 전이·연동 계약·구성도</sub>
+        <sub>직원 역할·권한·인계·상태 연동 계약·구성도</sub>
       </td>
       <td width="50%" valign="top">
         <strong>비공개 실행 경계</strong><br>
