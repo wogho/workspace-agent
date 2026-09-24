@@ -204,9 +204,13 @@ workspace-ss-<employee>/
 - 로그, 캐시, 런타임 상태, lock 파일
 - 고객 이메일, 게임 키, 결제정보, 원본 장부
 - 개인 계정 정보와 외부 서비스 인증정보
+- 구매팀 직원의 스킬 본문과 구매 실행 자료
+- Loaded, Yuplay, GMG 등 매입처별 스킬·플레이북·계정·가격·주문 자료
 
 프로필 폴더는 런타임 설정 전체가 아니라 표시용 `profile.yaml`만 관리한다.
 실제 비밀값과 운영 설정은 각 서버의 로컬 Hermes 설정에서만 관리한다.
+구매팀 `workspace-ss-purchase-*`의 `skills/`는 로컬 폴더만 유지하고, GitHub에는 빈 폴더 표식
+`.gitkeep`만 둘 수 있다. 스킬 본문과 매입처별 자료는 커밋·푸시하지 않는다.
 
 ## 동기화 원칙
 
@@ -226,12 +230,16 @@ for workspace in "$HERMES_HOME"/workspace-*; do
 done
 ```
 
+구매팀 `workspace-ss-purchase-*`의 `skills/`와 Loaded·Yuplay·GMG 등 매입처 자료는
+동기화 대상에서 제외한다. 해당 자료는 영업비밀로 간주하고 서버 로컬에만 보관한다.
+
 동기화 후에는 다음을 확인한다.
 
 ```bash
 git diff --check
 find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 find . -type f -name 'SKILL.md' -print
+git grep -niE 'loaded|yuplay|gmg|vendor' -- ':!README.md' || true
 ```
 
-마지막 두 명령은 각각 민감 파일과 아직 작성하지 않은 스킬 파일이 포함되지 않았는지 확인하기 위한 것이다.
+마지막 명령은 매입처명과 매입처 자료가 저장소에 들어갔는지 확인하기 위한 것이다.

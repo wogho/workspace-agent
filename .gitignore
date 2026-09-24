@@ -25,6 +25,14 @@ auth.lock
 *.pem
 *.token
 
+# Purchase-team skills and vendor playbooks are local-only trade secrets.
+workspace-ss-purchase-*/skills/*
+!workspace-ss-purchase-*/skills/.gitkeep
+**/*loaded*
+**/*yuplay*
+**/*gmg*
+**/*vendor*
+
 # OS artifacts
 .DS_Store
 Thumbs.db
