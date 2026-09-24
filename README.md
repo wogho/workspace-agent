@@ -43,6 +43,7 @@ Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 
       <td align="center"><strong>5</strong><br><sub>표준 직원 문서</sub></td>
       <td align="center"><strong>1</strong><br><sub>DB 정본</sub></td>
       <td align="center"><strong>3</strong><br><sub>브라우저 실행 단계</sub></td>
+      <td align="center"><strong>5</strong><br><sub>Gemini 계정 수</sub></td>
       <td align="center"><strong>0</strong><br><sub>공개 운영 비밀</sub></td>
     </tr>
   </table>
