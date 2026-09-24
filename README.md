@@ -9,9 +9,35 @@
   <sub>Reasoning, workflow automation, browser execution, and human decisions separated by explicit boundaries.</sub>
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/AI%20Employees-17-6C5CE7?style=for-the-badge" alt="17 AI employees" />
+  <img src="https://img.shields.io/badge/Source%20of%20Truth-PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL source of truth" />
+  <img src="https://img.shields.io/badge/Workflow-n8n-EA4B71?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n workflow orchestration" />
+  <img src="https://img.shields.io/badge/Automation-Self--hosted-111827?style=for-the-badge&logo=docker&logoColor=white" alt="Self-hosted automation" />
+</p>
+
+<p align="center">
+  <a href="#기술-스택">기술 스택</a> ·
+  <a href="#전체-구성도">구성도</a> ·
+  <a href="#17명-ai-직원-조직">AI 직원 조직</a> ·
+  <a href="#공개-범위와-보안-정책">공개 범위</a>
+</p>
+
 Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 포트폴리오용으로 정리한 저장소다.
 이 저장소의 핵심은 특정 쇼핑몰의 영업자료가 아니라, **역할 기반 AI 직원**, **상태 중심 업무 코어**,
 **브라우저 자동화 경계**, **이벤트 연결**, **운영 문서화**를 하나의 구조로 설계한 기술적 접근이다.
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>17</strong><br><sub>역할 기반 AI 직원</sub></td>
+      <td align="center"><strong>5</strong><br><sub>표준 직원 문서</sub></td>
+      <td align="center"><strong>1</strong><br><sub>DB 정본</sub></td>
+      <td align="center"><strong>3</strong><br><sub>브라우저 실행 단계</sub></td>
+      <td align="center"><strong>0</strong><br><sub>공개 운영 비밀</sub></td>
+    </tr>
+  </table>
+</div>
 
 ## 프로젝트 요약
 
@@ -30,6 +56,72 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
 비즈니스 거래 데이터, 인증정보, 계정 식별자, 고객정보, 매입처별 자료, 구매팀 스킬 본문은 공개하지 않는다.
 
 ## 기술 스택
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>기술<br/>스택</strong></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/django/092E20" width="32" alt="Django" /><br/><sub>Django</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/djangorestframework/A30000" width="32" alt="Django REST framework" /><br/><sub>DRF</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/react/61DAFB" width="32" alt="React" /><br/><sub>React</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/typescript/3178C6" width="32" alt="TypeScript" /><br/><sub>TypeScript</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/vite/646CFF" width="32" alt="Vite" /><br/><sub>Vite</sub></td>
+    </tr>
+    <tr>
+      <td align="center"><strong>데이터·<br/>워크플로</strong></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/postgresql/4169E1" width="32" alt="PostgreSQL" /><br/><sub>PostgreSQL</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/n8n/EA4B71" width="32" alt="n8n" /><br/><sub>n8n</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/yaml/CB171E" width="32" alt="YAML" /><br/><sub>YAML</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/markdown/000000" width="32" alt="Markdown" /><br/><sub>Markdown</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/mermaid/FF3670" width="32" alt="Mermaid" /><br/><sub>Mermaid</sub></td>
+    </tr>
+    <tr>
+      <td align="center"><strong>AI·실행·<br/>연동</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/Hermes-111827?style=flat-square&logoColor=white" height="32" alt="Hermes Agent" /><br/><sub>Hermes Agent</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Claw3D-6C5CE7?style=flat-square&logoColor=white" height="32" alt="Claw3D" /><br/><sub>Claw3D</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/docker/2496ED" width="32" alt="Docker" /><br/><sub>Docker</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/slack/4A154B" width="32" alt="Slack" /><br/><sub>Slack</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/websockets/010101" width="32" alt="WebSocket" /><br/><sub>WebSocket</sub></td>
+    </tr>
+    <tr>
+      <td align="center"><strong>브라우저·<br/>운영</strong></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/googlechrome/4285F4" width="32" alt="Chromium" /><br/><sub>Chromium</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Skyvern-0F172A?style=flat-square&logoColor=white" height="32" alt="Skyvern" /><br/><sub>Skyvern</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/ubuntu/E95420" width="32" alt="Ubuntu" /><br/><sub>Ubuntu</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/python/3776AB" width="32" alt="Python" /><br/><sub>Python</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/git/F05032" width="32" alt="Git" /><br/><sub>Git</sub></td>
+    </tr>
+    <tr>
+      <td align="center"><strong>업무<br/>연동</strong></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/curl/073551" width="32" alt="HTTP API" /><br/><sub>HTTP API</sub></td>
+      <td align="center"><img src="https://cdn.simpleicons.org/webhooks/4285F4" width="32" alt="Webhook" /><br/><sub>Webhook</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Vendor%20Connectors-Private-64748B?style=flat-square" height="32" alt="Private vendor connectors" /><br/><sub>공급처 커넥터</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/SMTP-64748B?style=flat-square" height="32" alt="SMTP" /><br/><sub>SMTP</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Approval%20Gate-16A34A?style=flat-square" height="32" alt="Approval gate" /><br/><sub>승인 게이트</sub></td>
+    </tr>
+  </table>
+</div>
+
+<p align="center">
+  <sub>업무 데이터는 DB 정본으로 관리하고, AI 판단·워크플로·브라우저 실행·사람의 승인을 명시적으로 분리한다.</sub>
+</p>
+
+### 포트폴리오용 기술 선택
+
+<div align="center">
+  <table>
+    <tr>
+      <td><strong>Reasoning</strong><br><sub>Hermes Agent · 역할별 판단과 인계</sub></td>
+      <td><strong>Orchestration</strong><br><sub>n8n · 예약·polling·외부 연결</sub></td>
+      <td><strong>State</strong><br><sub>PostgreSQL · 상태·감사·정합성</sub></td>
+    </tr>
+    <tr>
+      <td><strong>Execution</strong><br><sub>Chromium · Skyvern · 브라우저 경계</sub></td>
+      <td><strong>Decision Gate</strong><br><sub>Slack Socket Mode · 승인·예외</sub></td>
+      <td><strong>Operations</strong><br><sub>Claw3D · Kanban · WebSocket</sub></td>
+    </tr>
+  </table>
+</div>
 
 | 계층 | 기술 | 담당 영역 | 설계 포인트 |
 |---|---|---|---|
