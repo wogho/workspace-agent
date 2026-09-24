@@ -4,7 +4,7 @@ Claw3D와 Hermes에서 사용하는 AI 직원의 역할 문서와 안전한 작�
 이 저장소는 Smartstore 조직 17명의 문서형 작업공간과 Hermes 프로필의 비민감 메타데이터를 보관한다.
 
 ## 범위
-
+https://smartstore.naver.com/allupstore
 - Smartstore 계획에 정의된 직원 17명의 작업공간 문서
 - 기존 `workspace-blog`, `workspace-infra` 작업공간 문서
 - Smartstore Hermes 프로필의 표시용 `profile.yaml`
