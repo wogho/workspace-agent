@@ -45,6 +45,21 @@ Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 
 AI 대화나 Kanban 카드가 거래의 기준 기록이 되지 않도록 PostgreSQL을 정본으로 두고, n8n은 연결·예약·알림,
 Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 진행상황과 사용자 결정을 전달하는 계층으로 제한한다.
 
+<div align="center">
+  <table>
+    <tr>
+      <td width="50%" valign="top">
+        <strong>공개 아키텍처</strong><br>
+        <sub>직원 역할·권한·인계·상태 전이·연동 계약·구성도</sub>
+      </td>
+      <td width="50%" valign="top">
+        <strong>비공개 실행 경계</strong><br>
+        <sub>토큰·세션·거래 데이터·구매 스킬·운영 런타임</sub>
+      </td>
+    </tr>
+  </table>
+</div>
+
 이 저장소는 다음을 공개한다.
 
 - AI 직원 17명의 역할·권한·인계·중단 조건 문서
@@ -62,7 +77,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
     <tr>
       <td align="center"><strong>기술<br/>스택</strong></td>
       <td align="center"><img src="https://cdn.simpleicons.org/django/092E20" width="32" alt="Django" /><br/><sub>Django</sub></td>
-      <td align="center"><img src="https://cdn.simpleicons.org/djangorestframework/A30000" width="32" alt="Django REST framework" /><br/><sub>DRF</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/DRF-A30000?style=flat-square&logo=django&logoColor=white" height="32" alt="Django REST framework" /><br/><sub>DRF</sub></td>
       <td align="center"><img src="https://cdn.simpleicons.org/react/61DAFB" width="32" alt="React" /><br/><sub>React</sub></td>
       <td align="center"><img src="https://cdn.simpleicons.org/typescript/3178C6" width="32" alt="TypeScript" /><br/><sub>TypeScript</sub></td>
       <td align="center"><img src="https://cdn.simpleicons.org/vite/646CFF" width="32" alt="Vite" /><br/><sub>Vite</sub></td>
@@ -80,8 +95,8 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
       <td align="center"><img src="https://img.shields.io/badge/Hermes-111827?style=flat-square&logoColor=white" height="32" alt="Hermes Agent" /><br/><sub>Hermes Agent</sub></td>
       <td align="center"><img src="https://img.shields.io/badge/Claw3D-6C5CE7?style=flat-square&logoColor=white" height="32" alt="Claw3D" /><br/><sub>Claw3D</sub></td>
       <td align="center"><img src="https://cdn.simpleicons.org/docker/2496ED" width="32" alt="Docker" /><br/><sub>Docker</sub></td>
-      <td align="center"><img src="https://cdn.simpleicons.org/slack/4A154B" width="32" alt="Slack" /><br/><sub>Slack</sub></td>
-      <td align="center"><img src="https://cdn.simpleicons.org/websockets/010101" width="32" alt="WebSocket" /><br/><sub>WebSocket</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Slack-4A154B?style=flat-square&logo=slack&logoColor=white" height="32" alt="Slack" /><br/><sub>Slack</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/WebSocket-111827?style=flat-square" height="32" alt="WebSocket" /><br/><sub>WebSocket</sub></td>
     </tr>
     <tr>
       <td align="center"><strong>브라우저·<br/>운영</strong></td>
@@ -94,7 +109,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
     <tr>
       <td align="center"><strong>업무<br/>연동</strong></td>
       <td align="center"><img src="https://cdn.simpleicons.org/curl/073551" width="32" alt="HTTP API" /><br/><sub>HTTP API</sub></td>
-      <td align="center"><img src="https://cdn.simpleicons.org/webhooks/4285F4" width="32" alt="Webhook" /><br/><sub>Webhook</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Webhook-4285F4?style=flat-square" height="32" alt="Webhook" /><br/><sub>Webhook</sub></td>
       <td align="center"><img src="https://img.shields.io/badge/Vendor%20Connectors-Private-64748B?style=flat-square" height="32" alt="Private vendor connectors" /><br/><sub>공급처 커넥터</sub></td>
       <td align="center"><img src="https://img.shields.io/badge/SMTP-64748B?style=flat-square" height="32" alt="SMTP" /><br/><sub>SMTP</sub></td>
       <td align="center"><img src="https://img.shields.io/badge/Approval%20Gate-16A34A?style=flat-square" height="32" alt="Approval gate" /><br/><sub>승인 게이트</sub></td>
@@ -141,6 +156,17 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
 | 문서·구성 | **Markdown, YAML, Mermaid** | 역할 계약, 앱 매니페스트, 구성도 | 실행 가능한 설정과 설명 문서를 같은 구조로 관리한다 |
 
 ## 핵심 설계 원칙
+
+<div align="center">
+  <img src="https://img.shields.io/badge/01-State%20First-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="State first" />
+  <img src="https://img.shields.io/badge/02-Scoped%20Tools-6C5CE7?style=for-the-badge" alt="Scoped tools" />
+  <img src="https://img.shields.io/badge/03-Execution%20Boundary-0F766E?style=for-the-badge" alt="Execution boundary" />
+  <img src="https://img.shields.io/badge/04-Reconcile%20Failures-B45309?style=for-the-badge" alt="Reconcile failures" />
+</div>
+
+<div align="center">
+  <sub>상태를 먼저 기록하고, 도구를 좁게 노출하며, 실행과 판단을 분리하고, 실패를 재조정한다.</sub>
+</div>
 
 ### 1. AI 판단과 거래 정본의 분리
 
@@ -220,6 +246,20 @@ AI 직원에게 범용 SQL이나 무제한 셸 권한을 주지 않고, 다음�
 
 ## 업무 데이터 흐름
 
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>01<br>Ingest</strong><br><sub>외부 API·n8n<br>조회·중복 제거</sub></td>
+      <td align="center">→</td>
+      <td align="center"><strong>02<br>Decide</strong><br><sub>Django·PostgreSQL<br>상태 전이·승인</sub></td>
+      <td align="center">→</td>
+      <td align="center"><strong>03<br>Execute</strong><br><sub>Hermes·Browser worker<br>prepare / commit</sub></td>
+      <td align="center">→</td>
+      <td align="center"><strong>04<br>Reconcile</strong><br><sub>outbox·감사 이력<br>결과 대조</sub></td>
+    </tr>
+  </table>
+</div>
+
 ```mermaid
 flowchart TD
     N[네이버 커머스 API]
@@ -256,6 +296,18 @@ flowchart TD
 
 직원은 프로필 ID, 표시명, 작업공간, 역할 문서로 구성된다. 표시명은 운영 화면에서 식별하기 쉽도록
 `이름 (ss-역할)` 형식을 사용하며, 프로필 ID와 폴더명은 안정적인 내부 식별자로 유지한다.
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>지휘본부</strong><br><sub>검증·전략·품질</sub></td>
+      <td align="center"><strong>플랫폼·영업</strong><br><sub>상품·시장·매입 관측</sub></td>
+      <td align="center"><strong>인프라</strong><br><sub>서비스·데이터·복구</sub></td>
+      <td align="center"><strong>구매·배송</strong><br><sub>주문·실행·전달</sub></td>
+      <td align="center"><strong>회계·경리</strong><br><sub>원장·정산·분류</sub></td>
+    </tr>
+  </table>
+</div>
 
 <p align="center">
   <img src="docs/assets/employee-network.svg" alt="17 AI employee organization map" width="100%">
@@ -302,6 +354,20 @@ flowchart TD
 - Hermes gateway 명령 endpoint
 - 토큰·사용자 ID는 저장소에 기록하지 않음
 
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>17 Apps</strong><br><sub>직원별 표시명·봇·권한</sub></td>
+      <td align="center">→</td>
+      <td align="center"><strong>Socket Mode</strong><br><sub>실시간 이벤트 전달</sub></td>
+      <td align="center">→</td>
+      <td align="center"><strong>Hermes Gateway</strong><br><sub>프로필·작업공간 연결</sub></td>
+      <td align="center">→</td>
+      <td align="center"><strong>Approval Gate</strong><br><sub>예외·확정·중단</sub></td>
+    </tr>
+  </table>
+</div>
+
 ```text
 Slack App Olivia (ss-최고운영)
         |
@@ -317,6 +383,9 @@ workspace-ss-coo
 비공개 설정에서 수행한다.
 
 ## 저장소 파일 트리
+
+<details>
+<summary><strong>공개 저장소 구조 펼쳐보기</strong></summary>
 
 ```text
 workspace-agent/
@@ -402,10 +471,23 @@ workspace-agent/
 └── workspace-ss-sales-sourcing/
 ```
 
+</details>
+
 각 Smartstore workspace의 표준 문서는 동일한 계약을 따르며, 구매팀 `skills/`는 영업비밀 보호를 위해
 빈 폴더 표식만 저장한다. Git은 빈 폴더를 추적할 수 없으므로 `.gitkeep`을 사용한다.
 
 ## 포트폴리오 관점의 기술적 포인트
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>Stateful</strong><br><sub>재시작·중복·부분 실패 복구</sub></td>
+      <td align="center"><strong>Role-based</strong><br><sub>17개 역할과 명시적 권한 경계</sub></td>
+      <td align="center"><strong>Replaceable</strong><br><sub>브라우저 실행기 교체 가능</sub></td>
+      <td align="center"><strong>Auditable</strong><br><sub>상태 전이·outbox·감사 이력</sub></td>
+    </tr>
+  </table>
+</div>
 
 ### 상태 중심 설계
 
@@ -430,21 +512,49 @@ DB에서 복구할 수 있다. 이는 단순 자동화 스크립트와 달리 �
 
 ## 공개 범위와 보안 정책
 
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>공개</strong><br><sub>역할 문서 · 구조 · 계약 · 구성도<br>재현 가능한 포트폴리오 레이어</sub></td>
+      <td align="center"><strong>비공개</strong><br><sub>인증정보 · 거래 데이터 · 세션<br>운영 런타임 · 구매 실행 자료</sub></td>
+    </tr>
+  </table>
+</div>
+
 저장소에 포함하지 않는 항목:
 
-- API key, access token, OAuth token, 비밀번호, private key
-- Slack Bot/App Token과 사용자 ID
-- 브라우저 쿠키·세션·인증 파일
-- PostgreSQL·SQLite·n8n 실행 데이터
-- 고객 이메일, 결제정보, 게임 키, 원본 장부
-- 매입처별 계정·가격·주문 자료와 구매 실행 playbook
-- 구매팀의 `SKILL.md` 및 실제 스킬 구현
-- 로그, 캐시, 런타임 상태, 내부 비밀 설정
+<table>
+  <tr>
+    <td>API key, access token, OAuth token, 비밀번호, private key</td>
+    <td>Slack Bot/App Token과 사용자 ID</td>
+  </tr>
+  <tr>
+    <td>브라우저 쿠키·세션·인증 파일</td>
+    <td>PostgreSQL·SQLite·n8n 실행 데이터</td>
+  </tr>
+  <tr>
+    <td>고객 이메일, 결제정보, 게임 키, 원본 장부</td>
+    <td>매입처별 계정·가격·주문 자료와 구매 실행 playbook</td>
+  </tr>
+  <tr>
+    <td>구매팀의 <code>SKILL.md</code> 및 실제 스킬 구현</td>
+    <td>로그, 캐시, 런타임 상태, 내부 비밀 설정</td>
+  </tr>
+</table>
 
 `.gitignore`는 구매팀 스킬과 매입처별 자료가 실수로 추가되지 않도록 경로명 기반 차단 규칙도 포함한다.
 공개 저장소에 올리는 파일은 문서 allowlist와 staged diff 검사를 거친다.
 
 ## 검증 명령
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Formatting-git%20diff%20--check-16A34A?style=flat-square" alt="Formatting check" />
+  <img src="https://img.shields.io/badge/Secrets-Excluded-16A34A?style=flat-square" alt="Secrets excluded" />
+  <img src="https://img.shields.io/badge/Skills-Public%20None-6C5CE7?style=flat-square" alt="No public skills" />
+</div>
+
+<details>
+<summary><strong>공개 저장소 검증 명령 펼쳐보기</strong></summary>
 
 ```bash
 git diff --check
@@ -453,6 +563,8 @@ git ls-files '*skills/*'
 git ls-files | grep -Ei 'credentials|secrets|token|private' || true
 find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 ```
+
+</details>
 
 정상 공개 상태에서는 실제 `SKILL.md`, 인증파일, 데이터베이스, 매입처별 파일이 출력되지 않아야 한다.
 
