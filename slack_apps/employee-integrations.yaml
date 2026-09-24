@@ -150,7 +150,7 @@ employees:
 - id: ss-infra-ops
   team: 인프라팀
   role: 인프라 운영
-  app_name: Alex (ss-인프라운영)
+  app_name: Mason (ss-인프라운영)
   app_manifest: ss-infra-ops/app-manifest.yaml
   profile: ss-infra-ops
   workspace: /home/ubuntu/.hermes/workspace-ss-infra-ops
