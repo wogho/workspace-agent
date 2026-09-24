@@ -1,5 +1,14 @@
 # Workspace Agent
 
+<p align="center">
+  <img src="docs/assets/workspace-agent-hero.svg" alt="Workspace Agent technical architecture" width="100%">
+</p>
+
+<p align="center">
+  <strong>Role-based AI operations architecture</strong><br>
+  <sub>Reasoning, workflow automation, browser execution, and human decisions separated by explicit boundaries.</sub>
+</p>
+
 Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 포트폴리오용으로 정리한 저장소다.
 이 저장소의 핵심은 특정 쇼핑몰의 영업자료가 아니라, **역할 기반 AI 직원**, **상태 중심 업무 코어**,
 **브라우저 자동화 경계**, **이벤트 연결**, **운영 문서화**를 하나의 구조로 설계한 기술적 접근이다.
@@ -156,6 +165,10 @@ flowchart TD
 직원은 프로필 ID, 표시명, 작업공간, 역할 문서로 구성된다. 표시명은 운영 화면에서 식별하기 쉽도록
 `이름 (ss-역할)` 형식을 사용하며, 프로필 ID와 폴더명은 안정적인 내부 식별자로 유지한다.
 
+<p align="center">
+  <img src="docs/assets/employee-network.svg" alt="17 AI employee organization map" width="100%">
+</p>
+
 | 팀 | 직원 | 프로필 | 작업공간 | 기술적 책임 |
 |---|---|---|---|---|
 | 지휘본부 | Olivia | `ss-coo` | `workspace-ss-coo` | 원본 증거와 장부의 교차 검증 |
@@ -217,6 +230,10 @@ workspace-ss-coo
 workspace-agent/
 ├── README.md
 ├── .gitignore
+├── docs/
+│   └── assets/
+│       ├── employee-network.svg
+│       └── workspace-agent-hero.svg
 ├── slack_apps/
 │   ├── employee-integrations.yaml
 │   ├── ss-accounting-naver/app-manifest.yaml
