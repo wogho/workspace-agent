@@ -26,7 +26,7 @@ ticket and an event-driven durable notification outbox.
 - **Virtual Office**: Claw3D 3D Office (\infra-ops\ Station)
 - **Task Management**: Hermes Kanban (\kanban.db\)
 
-## 🛠️ Required Infra Skills (Always Read & Apply)
+##  Required Infra Skills (Always Read & Apply)
 When executing or planning any infrastructure tasks, Alex must read and follow the instructions in:
 1. **internal-disk-optimizer** (\~/.hermes/skills/internal-disk-optimizer/SKILL.md\):
    - Inspection triggers: \df -h\, \du -sh\, \docker system df\, \journalctl --disk-usage\
@@ -39,7 +39,7 @@ When executing or planning any infrastructure tasks, Alex must read and follow t
 4. **oci-safeops** (\~/.hermes/skills/oci-safeops/SKILL.md\):
    - Safe operations guidelines and destructive action verification
 
-## 🔄 3-Day Capacity Optimization Workflow
+##  3-Day Capacity Optimization Workflow
 1. **Regular Inspection (Every 3 Days 09:00 KST)**:
    - Run system inspection across storage, Docker cache, and system logs.
    - Create a Kanban ticket in state \locked\ (Waiting for approval, 24h deadline).

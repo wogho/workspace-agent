@@ -5,6 +5,25 @@ session/
 *.sqlite3-wal
 *.lock
 *.sock
+runtime/
+state.db*
+projects.db
+kanban.db
+logs/
+cache/
+audio_cache/
+image_cache/
+
+# Credentials and runtime configuration
+.env
+.env.*
+!.env.example
+config.yaml
+auth.json
+auth.lock
+*.key
+*.pem
+*.token
 
 # OS artifacts
 .DS_Store
