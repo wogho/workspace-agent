@@ -14,6 +14,7 @@
   <img src="https://img.shields.io/badge/Source%20of%20Truth-PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL source of truth" />
   <img src="https://img.shields.io/badge/Workflow-n8n-EA4B71?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n workflow orchestration" />
   <img src="https://img.shields.io/badge/Automation-Self--hosted-111827?style=for-the-badge&logo=docker&logoColor=white" alt="Self-hosted automation" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-D22128?style=for-the-badge&logo=apache&logoColor=white" alt="Apache License 2.0" /></a>
 </p>
 
 <p align="center">
@@ -415,6 +416,7 @@ workspace-ss-coo
 ```text
 workspace-agent/
 ├── README.md
+├── LICENSE
 ├── .gitignore
 ├── docs/
 │   └── assets/
@@ -601,3 +603,9 @@ find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 - Django·React·PostgreSQL·n8n·Hermes·Claw3D·브라우저 worker를 포함한 목표 아키텍처 문서화
 - 구매팀 스킬과 매입처별 영업비밀은 저장소에서 제외
 - 저장소는 포트폴리오용 공개 구조와 비민감 운영 문서에 한정
+
+## 라이선스
+
+이 저장소의 원본 문서, 구성 파일, SVG 시각화 자산은 [Apache License 2.0](LICENSE)으로 공개한다.
+외부 서비스·상표·라이브러리·의존성은 각 권리자의 라이선스와 이용약관을 따르며, 이 저장소의 라이선스가
+그 권리를 대신 부여하지 않는다. 비공개 운영 데이터와 서버 로컬 스킬은 이 저장소의 배포 대상이 아니다.
