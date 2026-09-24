@@ -59,11 +59,11 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
     <tr>
       <td align="center" width="50%">
         <strong><a href="https://smartstore.naver.com/allupstore">Smartstore</a></strong><br>
-        <sub>상품·주문·배송이 연결되는 공개 상거래 표면</sub>
+        <sub>상품·주문·배송이 연결 상거래 표면</sub>
       </td>
       <td align="center" width="50%">
         <strong><a href="https://noong2.tistory.com/">Tistory Blog</a></strong><br>
-        <sub>프로젝트 배경·운영 기록·콘텐츠 공개 채널</sub>
+        <sub>프로젝트 운영 기록·콘텐츠 채널</sub>
       </td>
     </tr>
   </table>
@@ -74,11 +74,11 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
     <tr>
       <td width="50%" valign="top">
         <strong>공개 아키텍처</strong><br>
-        <sub>직원 역할·권한·인계·상태 연동 계약·구성도</sub>
+        <sub>직원 역할·권한·인계·상태 연동 구성도</sub>
       </td>
       <td width="50%" valign="top">
         <strong>비공개 실행 경계</strong><br>
-        <sub>토큰·세션·거래 데이터·구매 스킬·운영 런타임</sub>
+        <sub>토큰·세션·거래 데이터·구매 스킬 런타임</sub>
       </td>
     </tr>
   </table>
