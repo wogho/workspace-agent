@@ -1,4 +1,4 @@
-# Workspace Agent
+# Workspace Agent (스마트스토어, 블로그, 인프라관리 자동화)
 
 Claw3D와 Hermes에서 사용하는 AI 직원의 역할 문서와 안전한 작업공간 정의를 관리하는 저장소다.
 이 저장소는 Smartstore 조직 17명의 문서형 작업공간과 Hermes 프로필의 비민감 메타데이터를 보관한다.
