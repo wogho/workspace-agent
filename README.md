@@ -82,6 +82,29 @@ Claw3D와 Hermes에서 사용하는 AI 직원의 역할 문서와 안전한 작�
 4. 업무 스킬은 향후 사용자 승인 후 별도로 추가한다.
 5. 실제 상품·주문·결제·고객 메시지 변경은 역할 문서만으로 자동 허용되지 않는다.
 
+## 15.5 설계 구성도
+
+`project.md` 15.5의 판단·화면 조작·연결·정본 경계 구성을 반영한다.
+
+```mermaid
+flowchart TD
+    N[네이버 커머스 API]
+    N8[n8n: 예약 트리거·Slack·메일·외부 연결] -->|주기 호출| API[Django 업무 API: 조회 위치·중복 제거·상태 전이]
+    API <--> N
+    API <--> DB[(PostgreSQL: 정본·작업표·정책·전이표·제약·하트비트)]
+    API -->|사건| H[Hermes AI 사원 17역할: 판단·대응]
+    H -->|업무 단위 도구만| API
+    H -->|run 단위 판단| BR[브라우저 실행: 전역 임대 1개·주문 P0]
+    BR --> SK[Skyvern workflow: prepare / commit / reconcile]
+    SK --> BR --> API
+    API -->|outbox 사건| N8
+    N8 --> SL[Slack: 주문 채널·예외 채널·일일 요약]
+    SL -->|사용자 결정| N8 --> API
+    DB --> KB[Claw3D Kanban]
+    DB --> UI[웹 화면]
+    HC[서버 밖 감시] -.->|마지막 조회 성공 시각| API
+```
+
 ## 직원별 Slack 앱
 
 Smartstore 17명은 하나의 공용 Slack 앱이 아니라 직원별 Slack 앱을 사용한다.
