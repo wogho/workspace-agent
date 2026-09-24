@@ -81,12 +81,53 @@ Claw3D와 Hermes에서 사용하는 AI 직원의 역할 문서와 안전한 작�
 4. 업무 스킬은 향후 사용자 승인 후 별도로 추가한다.
 5. 실제 상품·주문·결제·고객 메시지 변경은 역할 문서만으로 자동 허용되지 않는다.
 
+## 직원별 Slack 앱
+
+Smartstore 17명은 하나의 공용 Slack 앱이 아니라 직원별 Slack 앱을 사용한다.
+각 앱은 동일한 Hermes Socket Mode 기본 구조를 사용하지만, 앱 이름·봇 토큰·앱 토큰·허용 사용자·담당 채널은 직원별로 분리한다.
+
+```text
+Slack App ss-coo
+        |
+        v
+Hermes profile ss-coo
+        |
+        v
+workspace-ss-coo
+```
+
+나머지 직원도 같은 구조로 연결한다. 앱 매니페스트는 `slack_apps/ss-*/app-manifest.yaml`에,
+17개 앱의 채널·프로필·환경변수 매핑은 `slack_apps/employee-integrations.yaml`에 저장한다.
+파일에는 실제 토큰이나 Slack 사용자 ID를 넣지 않는다.
+
+Slack에서 앱을 만들 때는 각 직원 디렉터리의 매니페스트를 해당 앱의 App Manifest에 개별적으로 가져온다.
+그 다음 Socket Mode를 켜고 발급된 토큰을 해당 Hermes 프로필의 `.env`에 등록한다.
+
 ## 폴더 트리
 
 ```text
 workspace-agent/
 ├── README.md
 ├── .gitignore
+├── slack_apps/
+│   ├── employee-integrations.yaml
+│   ├── ss-accounting-naver/app-manifest.yaml
+│   ├── ss-accounting-web/app-manifest.yaml
+│   ├── ss-bookkeeping/app-manifest.yaml
+│   ├── ss-cfo/app-manifest.yaml
+│   ├── ss-coo/app-manifest.yaml
+│   ├── ss-cso/app-manifest.yaml
+│   ├── ss-cto/app-manifest.yaml
+│   ├── ss-delivery/app-manifest.yaml
+│   ├── ss-infra-data/app-manifest.yaml
+│   ├── ss-infra-ops/app-manifest.yaml
+│   ├── ss-order-watch/app-manifest.yaml
+│   ├── ss-platform/app-manifest.yaml
+│   ├── ss-purchase-backup/app-manifest.yaml
+│   ├── ss-purchase-main/app-manifest.yaml
+│   ├── ss-purchase-monitor/app-manifest.yaml
+│   ├── ss-sales-market/app-manifest.yaml
+│   └── ss-sales-sourcing/app-manifest.yaml
 ├── profiles/
 │   ├── ss-accounting-naver/profile.yaml
 │   ├── ss-accounting-web/profile.yaml

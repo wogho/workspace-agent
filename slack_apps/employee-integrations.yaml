@@ -1,0 +1,339 @@
+# 직원별 Slack 앱과 Hermes Socket Mode 연동 초안
+# 이 파일에는 토큰이나 Slack 사용자 ID를 넣지 않는다.
+
+version: 1
+purpose: Smartstore 17명 직원별 Slack 앱 생성 및 Hermes Socket Mode 연동 초안
+workspace_url: https://w1618802361-n9r230120.slack.com
+import_order: 각 직원 디렉터리의 app-manifest.yaml을 Slack App Manifest에 한 번씩 가져온다.
+secrets_policy: 토큰과 사용자 ID는 이 파일에 기록하지 않고 각 Hermes 프로필 .env에 직접 등록한다.
+defaults:
+  socket_mode: true
+  allow_all_users: false
+  manifest_options:
+  - no-assistant
+  bot_token_scope_env: SLACK_BOT_TOKEN
+  app_token_scope_env: SLACK_APP_TOKEN
+employees:
+- id: ss-coo
+  team: 지휘본부
+  role: COO
+  app_name: ss-coo
+  app_manifest: ss-coo/app-manifest.yaml
+  profile: ss-coo
+  workspace: /home/ubuntu/.hermes/workspace-ss-coo
+  channel_id: C0C307MF38C
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_COO_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_COO_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_COO_ALLOWED_USERS}
+  gateway_start: hermes -p ss-coo gateway start
+  gateway_status: hermes -p ss-coo gateway status
+- id: ss-cto
+  team: 지휘본부
+  role: CTO
+  app_name: ss-cto
+  app_manifest: ss-cto/app-manifest.yaml
+  profile: ss-cto
+  workspace: /home/ubuntu/.hermes/workspace-ss-cto
+  channel_id: C0C307MF38C
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_CTO_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_CTO_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_CTO_ALLOWED_USERS}
+  gateway_start: hermes -p ss-cto gateway start
+  gateway_status: hermes -p ss-cto gateway status
+- id: ss-cfo
+  team: 지휘본부
+  role: CFO
+  app_name: ss-cfo
+  app_manifest: ss-cfo/app-manifest.yaml
+  profile: ss-cfo
+  workspace: /home/ubuntu/.hermes/workspace-ss-cfo
+  channel_id: C0C307MF38C
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_CFO_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_CFO_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_CFO_ALLOWED_USERS}
+  gateway_start: hermes -p ss-cfo gateway start
+  gateway_status: hermes -p ss-cfo gateway status
+- id: ss-cso
+  team: 지휘본부
+  role: CSO
+  app_name: ss-cso
+  app_manifest: ss-cso/app-manifest.yaml
+  profile: ss-cso
+  workspace: /home/ubuntu/.hermes/workspace-ss-cso
+  channel_id: C0C307MF38C
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_CSO_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_CSO_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_CSO_ALLOWED_USERS}
+  gateway_start: hermes -p ss-cso gateway start
+  gateway_status: hermes -p ss-cso gateway status
+- id: ss-platform
+  team: 플랫폼팀
+  role: 디자인·상품등록·관리
+  app_name: ss-platform
+  app_manifest: ss-platform/app-manifest.yaml
+  profile: ss-platform
+  workspace: /home/ubuntu/.hermes/workspace-ss-platform
+  channel_id: C0C2RM8DN05
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_PLATFORM_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_PLATFORM_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_PLATFORM_ALLOWED_USERS}
+  gateway_start: hermes -p ss-platform gateway start
+  gateway_status: hermes -p ss-platform gateway status
+- id: ss-sales-sourcing
+  team: 영업팀
+  role: 매입정보 담당
+  app_name: ss-sales-sourcing
+  app_manifest: ss-sales-sourcing/app-manifest.yaml
+  profile: ss-sales-sourcing
+  workspace: /home/ubuntu/.hermes/workspace-ss-sales-sourcing
+  channel_id: C0C2F74E2VD
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_SALES_SOURCING_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_SALES_SOURCING_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_SALES_SOURCING_ALLOWED_USERS}
+  gateway_start: hermes -p ss-sales-sourcing gateway start
+  gateway_status: hermes -p ss-sales-sourcing gateway status
+- id: ss-sales-market
+  team: 영업팀
+  role: 시장비교 담당
+  app_name: ss-sales-market
+  app_manifest: ss-sales-market/app-manifest.yaml
+  profile: ss-sales-market
+  workspace: /home/ubuntu/.hermes/workspace-ss-sales-market
+  channel_id: C0C2F74E2VD
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_SALES_MARKET_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_SALES_MARKET_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_SALES_MARKET_ALLOWED_USERS}
+  gateway_start: hermes -p ss-sales-market gateway start
+  gateway_status: hermes -p ss-sales-market gateway status
+- id: ss-infra-ops
+  team: 인프라팀
+  role: 인프라 운영
+  app_name: ss-infra-ops
+  app_manifest: ss-infra-ops/app-manifest.yaml
+  profile: ss-infra-ops
+  workspace: /home/ubuntu/.hermes/workspace-ss-infra-ops
+  channel_id: C0C2WFLPDK4
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_INFRA_OPS_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_INFRA_OPS_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_INFRA_OPS_ALLOWED_USERS}
+  gateway_start: hermes -p ss-infra-ops gateway start
+  gateway_status: hermes -p ss-infra-ops gateway status
+- id: ss-infra-data
+  team: 인프라팀
+  role: 데이터·백업·복구
+  app_name: ss-infra-data
+  app_manifest: ss-infra-data/app-manifest.yaml
+  profile: ss-infra-data
+  workspace: /home/ubuntu/.hermes/workspace-ss-infra-data
+  channel_id: C0C2WFLPDK4
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_INFRA_DATA_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_INFRA_DATA_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_INFRA_DATA_ALLOWED_USERS}
+  gateway_start: hermes -p ss-infra-data gateway start
+  gateway_status: hermes -p ss-infra-data gateway status
+- id: ss-order-watch
+  team: 구매팀
+  role: 주문 관제
+  app_name: ss-order-watch
+  app_manifest: ss-order-watch/app-manifest.yaml
+  profile: ss-order-watch
+  workspace: /home/ubuntu/.hermes/workspace-ss-order-watch
+  channel_id: C0C2F7EM7D5
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_ORDER_WATCH_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_ORDER_WATCH_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_ORDER_WATCH_ALLOWED_USERS}
+  gateway_start: hermes -p ss-order-watch gateway start
+  gateway_status: hermes -p ss-order-watch gateway status
+- id: ss-purchase-monitor
+  team: 구매팀
+  role: 구매 모니터링
+  app_name: ss-purchase-monitor
+  app_manifest: ss-purchase-monitor/app-manifest.yaml
+  profile: ss-purchase-monitor
+  workspace: /home/ubuntu/.hermes/workspace-ss-purchase-monitor
+  channel_id: C0C2F7EM7D5
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_PURCHASE_MONITOR_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_PURCHASE_MONITOR_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_PURCHASE_MONITOR_ALLOWED_USERS}
+  gateway_start: hermes -p ss-purchase-monitor gateway start
+  gateway_status: hermes -p ss-purchase-monitor gateway status
+- id: ss-purchase-main
+  team: 구매팀
+  role: 구매 실행 주담당
+  app_name: ss-purchase-main
+  app_manifest: ss-purchase-main/app-manifest.yaml
+  profile: ss-purchase-main
+  workspace: /home/ubuntu/.hermes/workspace-ss-purchase-main
+  channel_id: C0C2F7EM7D5
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_PURCHASE_MAIN_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_PURCHASE_MAIN_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_PURCHASE_MAIN_ALLOWED_USERS}
+  gateway_start: hermes -p ss-purchase-main gateway start
+  gateway_status: hermes -p ss-purchase-main gateway status
+- id: ss-purchase-backup
+  team: 구매팀
+  role: 구매 실행 활성 백업
+  app_name: ss-purchase-backup
+  app_manifest: ss-purchase-backup/app-manifest.yaml
+  profile: ss-purchase-backup
+  workspace: /home/ubuntu/.hermes/workspace-ss-purchase-backup
+  channel_id: C0C2F7EM7D5
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_PURCHASE_BACKUP_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_PURCHASE_BACKUP_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_PURCHASE_BACKUP_ALLOWED_USERS}
+  gateway_start: hermes -p ss-purchase-backup gateway start
+  gateway_status: hermes -p ss-purchase-backup gateway status
+- id: ss-delivery
+  team: 구매팀
+  role: 배송·직접전달
+  app_name: ss-delivery
+  app_manifest: ss-delivery/app-manifest.yaml
+  profile: ss-delivery
+  workspace: /home/ubuntu/.hermes/workspace-ss-delivery
+  channel_id: C0C2F7EM7D5
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_DELIVERY_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_DELIVERY_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_DELIVERY_ALLOWED_USERS}
+  gateway_start: hermes -p ss-delivery gateway start
+  gateway_status: hermes -p ss-delivery gateway status
+- id: ss-accounting-web
+  team: 회계팀
+  role: 회계 웹 담당
+  app_name: ss-accounting-web
+  app_manifest: ss-accounting-web/app-manifest.yaml
+  profile: ss-accounting-web
+  workspace: /home/ubuntu/.hermes/workspace-ss-accounting-web
+  channel_id: C0C2WFXANEN
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_ACCOUNTING_WEB_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_ACCOUNTING_WEB_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_ACCOUNTING_WEB_ALLOWED_USERS}
+  gateway_start: hermes -p ss-accounting-web gateway start
+  gateway_status: hermes -p ss-accounting-web gateway status
+- id: ss-accounting-naver
+  team: 회계팀
+  role: 네이버 스마트스토어 회계
+  app_name: ss-accounting-naver
+  app_manifest: ss-accounting-naver/app-manifest.yaml
+  profile: ss-accounting-naver
+  workspace: /home/ubuntu/.hermes/workspace-ss-accounting-naver
+  channel_id: C0C2WFXANEN
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_ACCOUNTING_NAVER_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_ACCOUNTING_NAVER_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_ACCOUNTING_NAVER_ALLOWED_USERS}
+  gateway_start: hermes -p ss-accounting-naver gateway start
+  gateway_status: hermes -p ss-accounting-naver gateway status
+- id: ss-bookkeeping
+  team: 경리팀
+  role: 장부 담당
+  app_name: ss-bookkeeping
+  app_manifest: ss-bookkeeping/app-manifest.yaml
+  profile: ss-bookkeeping
+  workspace: /home/ubuntu/.hermes/workspace-ss-bookkeeping
+  channel_id: C0C2WG42V8S
+  socket_mode:
+    enabled: true
+    bot_token_env: SLACK_BOT_TOKEN
+    app_token_env: SLACK_APP_TOKEN
+  profile_env_mapping:
+    SLACK_BOT_TOKEN: ${SLACK_SS_BOOKKEEPING_BOT_TOKEN}
+    SLACK_APP_TOKEN: ${SLACK_SS_BOOKKEEPING_APP_TOKEN}
+    SLACK_ALLOW_ALL_USERS: 'false'
+    SLACK_ALLOWED_USERS: ${SLACK_SS_BOOKKEEPING_ALLOWED_USERS}
+  gateway_start: hermes -p ss-bookkeeping gateway start
+  gateway_status: hermes -p ss-bookkeeping gateway status
