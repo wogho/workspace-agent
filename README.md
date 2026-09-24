@@ -23,6 +23,15 @@
   <a href="#공개-범위와-보안-정책">공개 범위</a>
 </p>
 
+<p align="center">
+  <a href="https://smartstore.naver.com/allupstore">
+    <img src="https://img.shields.io/badge/Smartstore-allupstore-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Smartstore allupstore" />
+  </a>
+  <a href="https://noong2.tistory.com/">
+    <img src="https://img.shields.io/badge/Tistory-noong2-F15A24?style=for-the-badge" alt="Tistory noong2" />
+  </a>
+</p>
+
 Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 포트폴리오용으로 정리한 저장소다.
 이 저장소의 핵심은 특정 쇼핑몰의 영업자료가 아니라, **역할 기반 AI 직원**, **상태 중심 업무 코어**,
 **브라우저 자동화 경계**, **이벤트 연결**, **운영 문서화**를 하나의 구조로 설계한 기술적 접근이다.
@@ -44,6 +53,21 @@ Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 
 이 시스템은 17명의 역할별 AI 직원이 상품·주문·구매·배송·회계·인프라 업무를 분리해서 판단하도록 구성한다.
 AI 대화나 Kanban 카드가 거래의 기준 기록이 되지 않도록 PostgreSQL을 정본으로 두고, n8n은 연결·예약·알림,
 Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 진행상황과 사용자 결정을 전달하는 계층으로 제한한다.
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="50%">
+        <strong><a href="https://smartstore.naver.com/allupstore">Smartstore</a></strong><br>
+        <sub>상품·주문·배송이 연결되는 공개 상거래 표면</sub>
+      </td>
+      <td align="center" width="50%">
+        <strong><a href="https://noong2.tistory.com/">Tistory Blog</a></strong><br>
+        <sub>프로젝트 배경·운영 기록·콘텐츠 공개 채널</sub>
+      </td>
+    </tr>
+  </table>
+</div>
 
 <div align="center">
   <table>
