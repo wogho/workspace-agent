@@ -2,17 +2,17 @@ _metadata:
   major_version: 1
   minor_version: 1
 display_information:
-  name: Sales Sourcing (ss-매입정보)
+  name: Noah (ss-매입정보)
   description: "Smartstore 매입정보 담당 직원. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-sales-sourcing"
   background_color: '#1a1a2e'
-  long_description: "Sales Sourcing (ss-매입정보)용 Smartstore Slack 앱입니다. Hermes Socket Mode로 승인된 채널의 업무 요청과 상태 보고를 전달합니다. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-sales-sourcing. 스킬은 아직 설치되지 않았으며 실제 상품·주문·결제·고객 메시지 변경은 사용자 승인 없이 수행하지 않습니다."
+  long_description: "Noah (ss-매입정보)용 Smartstore Slack 앱입니다. Hermes Socket Mode로 승인된 채널의 업무 요청과 상태 보고를 전달합니다. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-sales-sourcing. 스킬은 아직 설치되지 않았으며 실제 상품·주문·결제·고객 메시지 변경은 사용자 승인 없이 수행하지 않습니다."
 features:
   app_home:
     home_tab_enabled: false
     messages_tab_enabled: true
     messages_tab_read_only_enabled: false
   bot_user:
-    display_name: Sales Sourcing (ss-매입정보)
+    display_name: Noah (ss-매입정보)
     always_online: true
   slash_commands:
   - command: /hermes

@@ -2,17 +2,17 @@ _metadata:
   major_version: 1
   minor_version: 1
 display_information:
-  name: Infra Data (ss-데이터복구)
+  name: Liam (ss-데이터복구)
   description: "Smartstore 데이터·백업·복구 직원. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-infra-data"
   background_color: '#1a1a2e'
-  long_description: "Infra Data (ss-데이터복구)용 Smartstore Slack 앱입니다. Hermes Socket Mode로 승인된 채널의 업무 요청과 상태 보고를 전달합니다. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-infra-data. 스킬은 아직 설치되지 않았으며 실제 상품·주문·결제·고객 메시지 변경은 사용자 승인 없이 수행하지 않습니다."
+  long_description: "Liam (ss-데이터복구)용 Smartstore Slack 앱입니다. Hermes Socket Mode로 승인된 채널의 업무 요청과 상태 보고를 전달합니다. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-infra-data. 스킬은 아직 설치되지 않았으며 실제 상품·주문·결제·고객 메시지 변경은 사용자 승인 없이 수행하지 않습니다."
 features:
   app_home:
     home_tab_enabled: false
     messages_tab_enabled: true
     messages_tab_read_only_enabled: false
   bot_user:
-    display_name: Infra Data (ss-데이터복구)
+    display_name: Liam (ss-데이터복구)
     always_online: true
   slash_commands:
   - command: /hermes

@@ -2,17 +2,17 @@ _metadata:
   major_version: 1
   minor_version: 1
 display_information:
-  name: CFO (ss-최고재무)
+  name: Sophia (ss-최고재무)
   description: "Smartstore CFO 직원. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-cfo"
   background_color: '#1a1a2e'
-  long_description: "CFO (ss-최고재무)용 Smartstore Slack 앱입니다. Hermes Socket Mode로 승인된 채널의 업무 요청과 상태 보고를 전달합니다. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-cfo. 스킬은 아직 설치되지 않았으며 실제 상품·주문·결제·고객 메시지 변경은 사용자 승인 없이 수행하지 않습니다."
+  long_description: "Sophia (ss-최고재무)용 Smartstore Slack 앱입니다. Hermes Socket Mode로 승인된 채널의 업무 요청과 상태 보고를 전달합니다. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-cfo. 스킬은 아직 설치되지 않았으며 실제 상품·주문·결제·고객 메시지 변경은 사용자 승인 없이 수행하지 않습니다."
 features:
   app_home:
     home_tab_enabled: false
     messages_tab_enabled: true
     messages_tab_read_only_enabled: false
   bot_user:
-    display_name: CFO (ss-최고재무)
+    display_name: Sophia (ss-최고재무)
     always_online: true
   slash_commands:
   - command: /hermes

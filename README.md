@@ -90,7 +90,7 @@ Slack 앱과 봇의 표시명은 Claw3D에 이미 생성된 직원 이름을 유
 프로필 ID와 폴더명은 변경하지 않으며, 각 매니페스트의 설명에는 해당 직원의 원본 작업공간 경로를 기록한다.
 
 ```text
-Slack App COO (ss-최고운영)
+Slack App Olivia (ss-최고운영)
         |
         v
 Hermes profile ss-coo

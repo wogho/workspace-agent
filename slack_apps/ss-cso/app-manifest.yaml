@@ -2,17 +2,17 @@ _metadata:
   major_version: 1
   minor_version: 1
 display_information:
-  name: CSO (ss-최고전략)
+  name: Daniel (ss-최고전략)
   description: "Smartstore CSO 직원. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-cso"
   background_color: '#1a1a2e'
-  long_description: "CSO (ss-최고전략)용 Smartstore Slack 앱입니다. Hermes Socket Mode로 승인된 채널의 업무 요청과 상태 보고를 전달합니다. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-cso. 스킬은 아직 설치되지 않았으며 실제 상품·주문·결제·고객 메시지 변경은 사용자 승인 없이 수행하지 않습니다."
+  long_description: "Daniel (ss-최고전략)용 Smartstore Slack 앱입니다. Hermes Socket Mode로 승인된 채널의 업무 요청과 상태 보고를 전달합니다. 원본 폴더: /home/ubuntu/.hermes/workspace-ss-cso. 스킬은 아직 설치되지 않았으며 실제 상품·주문·결제·고객 메시지 변경은 사용자 승인 없이 수행하지 않습니다."
 features:
   app_home:
     home_tab_enabled: false
     messages_tab_enabled: true
     messages_tab_read_only_enabled: false
   bot_user:
-    display_name: CSO (ss-최고전략)
+    display_name: Daniel (ss-최고전략)
     always_online: true
   slash_commands:
   - command: /hermes
