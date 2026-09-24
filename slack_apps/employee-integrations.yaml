@@ -17,7 +17,7 @@ employees:
 - id: ss-coo
   team: 지휘본부
   role: COO
-  app_name: ss-coo
+  app_name: COO (ss-최고운영)
   app_manifest: ss-coo/app-manifest.yaml
   profile: ss-coo
   workspace: /home/ubuntu/.hermes/workspace-ss-coo
@@ -36,7 +36,7 @@ employees:
 - id: ss-cto
   team: 지휘본부
   role: CTO
-  app_name: ss-cto
+  app_name: CTO (ss-최고기술)
   app_manifest: ss-cto/app-manifest.yaml
   profile: ss-cto
   workspace: /home/ubuntu/.hermes/workspace-ss-cto
@@ -55,7 +55,7 @@ employees:
 - id: ss-cfo
   team: 지휘본부
   role: CFO
-  app_name: ss-cfo
+  app_name: CFO (ss-최고재무)
   app_manifest: ss-cfo/app-manifest.yaml
   profile: ss-cfo
   workspace: /home/ubuntu/.hermes/workspace-ss-cfo
@@ -74,7 +74,7 @@ employees:
 - id: ss-cso
   team: 지휘본부
   role: CSO
-  app_name: ss-cso
+  app_name: CSO (ss-최고전략)
   app_manifest: ss-cso/app-manifest.yaml
   profile: ss-cso
   workspace: /home/ubuntu/.hermes/workspace-ss-cso
@@ -93,7 +93,7 @@ employees:
 - id: ss-platform
   team: 플랫폼팀
   role: 디자인·상품등록·관리
-  app_name: ss-platform
+  app_name: Platform (ss-플랫폼)
   app_manifest: ss-platform/app-manifest.yaml
   profile: ss-platform
   workspace: /home/ubuntu/.hermes/workspace-ss-platform
@@ -112,7 +112,7 @@ employees:
 - id: ss-sales-sourcing
   team: 영업팀
   role: 매입정보 담당
-  app_name: ss-sales-sourcing
+  app_name: Sales Sourcing (ss-매입정보)
   app_manifest: ss-sales-sourcing/app-manifest.yaml
   profile: ss-sales-sourcing
   workspace: /home/ubuntu/.hermes/workspace-ss-sales-sourcing
@@ -131,7 +131,7 @@ employees:
 - id: ss-sales-market
   team: 영업팀
   role: 시장비교 담당
-  app_name: ss-sales-market
+  app_name: Sales Market (ss-시장비교)
   app_manifest: ss-sales-market/app-manifest.yaml
   profile: ss-sales-market
   workspace: /home/ubuntu/.hermes/workspace-ss-sales-market
@@ -150,7 +150,7 @@ employees:
 - id: ss-infra-ops
   team: 인프라팀
   role: 인프라 운영
-  app_name: ss-infra-ops
+  app_name: Infra Ops (ss-인프라운영)
   app_manifest: ss-infra-ops/app-manifest.yaml
   profile: ss-infra-ops
   workspace: /home/ubuntu/.hermes/workspace-ss-infra-ops
@@ -169,7 +169,7 @@ employees:
 - id: ss-infra-data
   team: 인프라팀
   role: 데이터·백업·복구
-  app_name: ss-infra-data
+  app_name: Infra Data (ss-데이터복구)
   app_manifest: ss-infra-data/app-manifest.yaml
   profile: ss-infra-data
   workspace: /home/ubuntu/.hermes/workspace-ss-infra-data
@@ -188,7 +188,7 @@ employees:
 - id: ss-order-watch
   team: 구매팀
   role: 주문 관제
-  app_name: ss-order-watch
+  app_name: Order Watch (ss-주문관제)
   app_manifest: ss-order-watch/app-manifest.yaml
   profile: ss-order-watch
   workspace: /home/ubuntu/.hermes/workspace-ss-order-watch
@@ -207,7 +207,7 @@ employees:
 - id: ss-purchase-monitor
   team: 구매팀
   role: 구매 모니터링
-  app_name: ss-purchase-monitor
+  app_name: Purchase Monitor (ss-구매모니터)
   app_manifest: ss-purchase-monitor/app-manifest.yaml
   profile: ss-purchase-monitor
   workspace: /home/ubuntu/.hermes/workspace-ss-purchase-monitor
@@ -226,7 +226,7 @@ employees:
 - id: ss-purchase-main
   team: 구매팀
   role: 구매 실행 주담당
-  app_name: ss-purchase-main
+  app_name: Purchase Main (ss-구매실행)
   app_manifest: ss-purchase-main/app-manifest.yaml
   profile: ss-purchase-main
   workspace: /home/ubuntu/.hermes/workspace-ss-purchase-main
@@ -245,7 +245,7 @@ employees:
 - id: ss-purchase-backup
   team: 구매팀
   role: 구매 실행 활성 백업
-  app_name: ss-purchase-backup
+  app_name: Purchase Backup (ss-구매백업)
   app_manifest: ss-purchase-backup/app-manifest.yaml
   profile: ss-purchase-backup
   workspace: /home/ubuntu/.hermes/workspace-ss-purchase-backup
@@ -264,7 +264,7 @@ employees:
 - id: ss-delivery
   team: 구매팀
   role: 배송·직접전달
-  app_name: ss-delivery
+  app_name: Delivery (ss-배송전달)
   app_manifest: ss-delivery/app-manifest.yaml
   profile: ss-delivery
   workspace: /home/ubuntu/.hermes/workspace-ss-delivery
@@ -283,7 +283,7 @@ employees:
 - id: ss-accounting-web
   team: 회계팀
   role: 회계 웹 담당
-  app_name: ss-accounting-web
+  app_name: Accounting Web (ss-회계웹)
   app_manifest: ss-accounting-web/app-manifest.yaml
   profile: ss-accounting-web
   workspace: /home/ubuntu/.hermes/workspace-ss-accounting-web
@@ -302,7 +302,7 @@ employees:
 - id: ss-accounting-naver
   team: 회계팀
   role: 네이버 스마트스토어 회계
-  app_name: ss-accounting-naver
+  app_name: Accounting Naver (ss-네이버회계)
   app_manifest: ss-accounting-naver/app-manifest.yaml
   profile: ss-accounting-naver
   workspace: /home/ubuntu/.hermes/workspace-ss-accounting-naver
@@ -321,7 +321,7 @@ employees:
 - id: ss-bookkeeping
   team: 경리팀
   role: 장부 담당
-  app_name: ss-bookkeeping
+  app_name: Bookkeeping (ss-장부)
   app_manifest: ss-bookkeeping/app-manifest.yaml
   profile: ss-bookkeeping
   workspace: /home/ubuntu/.hermes/workspace-ss-bookkeeping

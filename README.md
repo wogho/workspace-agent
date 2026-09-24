@@ -86,9 +86,11 @@ Claw3D와 Hermes에서 사용하는 AI 직원의 역할 문서와 안전한 작�
 
 Smartstore 17명은 하나의 공용 Slack 앱이 아니라 직원별 Slack 앱을 사용한다.
 각 앱은 동일한 Hermes Socket Mode 기본 구조를 사용하지만, 앱 이름·봇 토큰·앱 토큰·허용 사용자·담당 채널은 직원별로 분리한다.
+Slack 앱과 봇의 표시명은 Claw3D에 이미 생성된 직원 이름을 유지하고 `이름 (ss-한글역할)` 형식으로 표시한다.
+프로필 ID와 폴더명은 변경하지 않으며, 각 매니페스트의 설명에는 해당 직원의 원본 작업공간 경로를 기록한다.
 
 ```text
-Slack App ss-coo
+Slack App COO (ss-최고운영)
         |
         v
 Hermes profile ss-coo
