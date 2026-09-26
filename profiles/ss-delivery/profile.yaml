@@ -1,3 +1,2 @@
-description: 'Smartstore plan employee: ss-delivery; skills are intentionally not
-  installed yet.'
+description: 'Leo (ss-배송전달) — 승인된 배송 경로로 주문별 전달 상태를 확인하고 수신 서버 처리 결과를 기록한다.'
 description_auto: false

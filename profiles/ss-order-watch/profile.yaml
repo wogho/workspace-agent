@@ -1,3 +1,2 @@
-description: 'Smartstore plan employee: ss-order-watch; skills are intentionally not
-  installed yet.'
+description: 'Emma (ss-주문관제) — 공식 주문 사건을 받아 취소·클레임을 확인하고 결제·상품·수량 검증 후 구매 큐를 배정한다.'
 description_auto: false
