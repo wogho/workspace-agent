@@ -26,10 +26,10 @@
 
 <p align="center">
   <a href="https://smartstore.naver.com/allupstore">
-    <img src="https://img.shields.io/badge/Smartstore-allupstore-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Smartstore allupstore" />
+    <img src="https://img.shields.io/badge/Smartstore-allupstore-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Smartstore 오픈월드게이밍" />
   </a>
   <a href="https://noong2.tistory.com/">
-    <img src="https://img.shields.io/badge/Tistory-noong2-F15A24?style=for-the-badge" alt="Tistory noong2" />
+    <img src="https://img.shields.io/badge/Tistory-noong2-F15A24?style=for-the-badge" alt="눙이의 인프라 메모장" />
   </a>
 </p>
 
