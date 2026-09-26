@@ -35,3 +35,5 @@ workspace-ss-purchase-*/skills/*
 # OS artifacts
 .DS_Store
 Thumbs.db
+__pycache__/
+*.py[cod]

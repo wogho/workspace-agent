@@ -33,7 +33,7 @@
   </a>
 </p>
 
-Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 포트폴리오용으로 정리한 저장소다.
+Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 공개 기술 문서로 정리한 저장소다.
 이 저장소의 핵심은 특정 쇼핑몰의 영업자료가 아니라, **역할 기반 AI 직원**, **상태 중심 업무 코어**,
 **브라우저 자동화 경계**, **이벤트 연결**, **운영 문서화**를 하나의 구조로 설계한 기술적 접근이다.
 
@@ -147,7 +147,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
   <sub>업무 데이터는 DB 정본으로 관리하고, AI 판단·워크플로·브라우저 실행·사람의 승인을 명시적으로 분리한다.</sub>
 </p>
 
-### 포트폴리오용 기술 선택
+### 기술 선택
 
 <div align="center">
   <table>
@@ -318,6 +318,18 @@ flowchart TD
 | Slack | 진행상황, 예외, 사용자 결정 | 비밀값·원문 고객정보 저장 |
 | Claw3D/Kanban | 운영 시각화와 작업 관리 | 거래 정본 저장 |
 
+### 사건 알림 경로
+
+운영 런타임·프록시·heartbeat·배치는 공통 기록기(`ss_alert.py`)를 호출해 사건을
+JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 cursor와 quiet
+상태를 관리하면서 새 사건만 묶어 자동화 웹훅으로 보내고, 후속 워크플로가 팀 알림으로
+전달한다. 웹훅 자격증명, workflow·credential DB, 실제 로그와 상태 파일은 공개 범위에서
+제외한다. 공개 구현은 [`infra/alerts`](infra/alerts/)에 정리했다.
+
+<p align="center">
+  <img src="docs/assets/n8n-alert-flow.png" alt="자동화 알림 워크플로 실행 화면" width="100%">
+</p>
+
 ## 17명 AI 직원 조직
 
 직원은 프로필 ID, 표시명, 작업공간, 역할 문서로 구성된다. 표시명은 운영 화면에서 식별하기 쉽도록
@@ -421,7 +433,14 @@ workspace-agent/
 ├── docs/
 │   └── assets/
 │       ├── employee-network.svg
+│       ├── n8n-alert-flow.png
 │       └── workspace-agent-hero.svg
+├── infra/
+│   └── alerts/
+│       ├── bin/              # 사건 기록기와 자동화 웹훅 전송기
+│       ├── producers/        # 런타임·프록시·heartbeat·배치 알림 지점
+│       ├── systemd/          # 1분 주기 전송 서비스·타이머
+│       └── README.md         # 공개 알림 계약과 운영 비공개 경계
 ├── slack_apps/
 │   ├── employee-integrations.yaml
 │   ├── ss-accounting-naver/app-manifest.yaml
@@ -503,7 +522,7 @@ workspace-agent/
 각 Smartstore workspace의 표준 문서는 동일한 계약을 따르며, 구매팀 `skills/`는 영업비밀 보호를 위해
 빈 폴더 표식만 저장한다. Git은 빈 폴더를 추적할 수 없으므로 `.gitkeep`을 사용한다.
 
-## 포트폴리오 관점의 기술적 포인트
+## 기술적 포인트
 
 <div align="center">
   <table>
@@ -533,7 +552,7 @@ DB에서 복구할 수 있다. 이는 단순 자동화 스크립트와 달리 �
 
 ### 문서와 실행 설정의 분리
 
-포트폴리오 저장소에는 재현 가능한 구조와 비민감 계약만 두고, 운영 서버에는 비공개 환경변수,
+공개 저장소에는 재현 가능한 구조와 비민감 계약만 두고, 운영 서버에는 비공개 환경변수,
 브라우저 세션, 인증 설정, 업무 스킬 본문을 둔다. 공개 가능한 설계와 운영 비밀을 분리하는
 저장소 경계를 명확히 한 것이 이 프로젝트의 중요한 운영 설계다.
 
@@ -542,7 +561,7 @@ DB에서 복구할 수 있다. 이는 단순 자동화 스크립트와 달리 �
 <div align="center">
   <table>
     <tr>
-      <td align="center"><strong>공개</strong><br><sub>역할 문서 · 구조 · 계약 · 구성도<br>재현 가능한 포트폴리오 레이어</sub></td>
+      <td align="center"><strong>공개</strong><br><sub>역할 문서 · 구조 · 계약 · 구성도<br>재현 가능한 공개 레이어</sub></td>
       <td align="center"><strong>비공개</strong><br><sub>인증정보 · 거래 데이터 · 세션<br>운영 런타임 · 구매 실행 자료</sub></td>
     </tr>
   </table>
@@ -602,7 +621,7 @@ find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 - 직원별 Slack App Manifest와 Socket Mode 연동 계약 정리
 - Django·React·PostgreSQL·n8n·Hermes·Claw3D·브라우저 worker를 포함한 목표 아키텍처 문서화
 - 구매팀 스킬과 매입처별 영업비밀은 저장소에서 제외
-- 저장소는 포트폴리오용 공개 구조와 비민감 운영 문서에 한정
+- 저장소는 공개 구조와 비민감 운영 문서에 한정
 
 ## 라이선스
 
