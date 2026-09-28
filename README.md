@@ -343,6 +343,20 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
   </tr>
 </table>
 
+### 운영 웹 프런트엔드
+
+장부형 업무 웹의 공개용 React·TypeScript·Vite 소스를 `frontend/`에 정리했다.
+상품 장부, 회계 장부, 가격 계산기·정책 화면과 상대 경로 API 계약을 포함하며,
+운영 API·인증정보·원본 상품/주문/고객/금융 데이터·매입처 식별자는 포함하지 않는다.
+화면 예시는 실제 값과 날짜를 비식별화해 UI 구조만 보여준다.
+
+<table>
+  <tr>
+    <td align="center"><strong>상품 장부</strong><br><sub>상태·재고·가격·마진 관측</sub><br><br><img src="docs/assets/product-ledger-ui.png" alt="비식별화한 상품 장부 화면" width="100%"></td>
+    <td align="center"><strong>회계 장부</strong><br><sub>월별 대조·판매·정산·세금·입금</sub><br><br><img src="docs/assets/accounting-ledger-ui.png" alt="비식별화한 회계 장부 화면" width="100%"></td>
+  </tr>
+</table>
+
 ## 17명 AI 직원 조직
 
 직원은 프로필 ID, 표시명, 작업공간, 역할 문서로 구성된다. 표시명은 운영 화면에서 식별하기 쉽도록
@@ -445,13 +459,20 @@ workspace-agent/
 ├── .gitignore
 ├── docs/
 │   ├── assets/
+│   │   ├── accounting-ledger-ui.png
 │   │   ├── n8n-accounting-workflows.png
 │   │   ├── employee-network.svg
 │   │   ├── n8n-alert-flow.png
 │   │   ├── n8n-order-monitor.png
+│   │   ├── product-ledger-ui.png
 │   │   └── workspace-agent-hero.svg
 │   └── skills/
 │       └── accounting/       # 민감정보를 제거한 회계팀 공개 스킬 계약
+├── frontend/
+│   ├── src/                  # React 화면·상대 경로 API 계약·스타일
+│   ├── dist/                 # 정적 빌드 결과
+│   ├── package.json
+│   └── README.md
 ├── infra/
 │   └── alerts/
 │       ├── bin/              # 사건 기록기와 자동화 웹훅 전송기
