@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-  <a href="https://smartstore.naver.com/allupstore">
+  <a href="https://smartstore.naver.com/opengamingworld">
     <img src="https://img.shields.io/badge/Smartstore-오픈월드게이밍-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Smartstore 오픈월드게이밍" />
   </a>
   <a href="https://noong2.tistory.com/">
