@@ -330,6 +330,19 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
   <img src="docs/assets/n8n-alert-flow.png" alt="자동화 알림 워크플로 실행 화면" width="100%">
 </p>
 
+### 회계·주문관제 자동화 예시
+
+회계팀의 정기 자료 점검과 주문관제의 주기 조회는 각각 독립된 자동화 흐름으로
+운영된다. 공개 이미지는 노드 연결과 책임 경계만 보여주며, 접속 주소·토큰·인증정보·
+실행 데이터는 포함하지 않는다.
+
+<table>
+  <tr>
+    <td align="center"><strong>회계팀 정기 업무</strong><br><sub>자료 점검 → 회계팀 알림</sub><br><br><img src="docs/assets/n8n-accounting-workflows.png" alt="회계팀 정기 업무 자동화 흐름" width="100%"></td>
+    <td align="center"><strong>주문관제</strong><br><sub>주문 조회 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-order-monitor.png" alt="주문관제 자동화 흐름" width="100%"></td>
+  </tr>
+</table>
+
 ## 17명 AI 직원 조직
 
 직원은 프로필 ID, 표시명, 작업공간, 역할 문서로 구성된다. 표시명은 운영 화면에서 식별하기 쉽도록
@@ -431,10 +444,14 @@ workspace-agent/
 ├── LICENSE
 ├── .gitignore
 ├── docs/
-│   └── assets/
-│       ├── employee-network.svg
-│       ├── n8n-alert-flow.png
-│       └── workspace-agent-hero.svg
+│   ├── assets/
+│   │   ├── n8n-accounting-workflows.png
+│   │   ├── employee-network.svg
+│   │   ├── n8n-alert-flow.png
+│   │   ├── n8n-order-monitor.png
+│   │   └── workspace-agent-hero.svg
+│   └── skills/
+│       └── accounting/       # 민감정보를 제거한 회계팀 공개 스킬 계약
 ├── infra/
 │   └── alerts/
 │       ├── bin/              # 사건 기록기와 자동화 웹훅 전송기
