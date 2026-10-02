@@ -94,7 +94,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
 - 직원별 Slack App Manifest와 Socket Mode 연동 계약
 - 시스템 구성도, 데이터 흐름, 보안·민감정보 제외 원칙
 
-비즈니스 거래 데이터, 인증정보, 계정 식별자, 고객정보, 매입처별 자료, 구매팀 스킬 본문은 공개하지 않는다.
+비즈니스 거래 데이터, 인증정보, 계정 식별자, 고객정보, 외부 판매 채널별 자료, 구매팀 스킬 본문은 공개하지 않는다.
 
 ## 기술 스택
 
@@ -136,7 +136,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
       <td align="center"><strong>업무<br/>연동</strong></td>
       <td align="center"><img src="https://cdn.simpleicons.org/curl/073551" width="32" alt="HTTP API" /><br/><sub>HTTP API</sub></td>
       <td align="center"><img src="https://img.shields.io/badge/Webhook-4285F4?style=flat-square" height="32" alt="Webhook" /><br/><sub>Webhook</sub></td>
-      <td align="center"><img src="https://img.shields.io/badge/Vendor%20Connectors-Private-64748B?style=flat-square" height="32" alt="Private vendor connectors" /><br/><sub>공급처 커넥터</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/External%20Connectors-Private-64748B?style=flat-square" height="32" alt="Private external connectors" /><br/><sub>외부 채널 커넥터</sub></td>
       <td align="center"><img src="https://img.shields.io/badge/SMTP-64748B?style=flat-square" height="32" alt="SMTP" /><br/><sub>SMTP</sub></td>
       <td align="center"><img src="https://img.shields.io/badge/Approval%20Gate-16A34A?style=flat-square" height="32" alt="Approval gate" /><br/><sub>승인 게이트</sub></td>
     </tr>
@@ -347,7 +347,7 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
 
 장부형 업무 웹의 공개용 React·TypeScript·Vite 소스를 `frontend/`에 정리했다.
 상품 장부, 회계 장부, 가격 계산기·정책, 보낸 메일 화면과 상대 경로 API 계약을 포함하며,
-운영 API·인증정보·원본 상품/주문/고객/금융 데이터·매입처 식별자는 포함하지 않는다.
+운영 API·인증정보·원본 상품/주문/고객/금융 데이터·외부 판매 채널 식별자는 포함하지 않는다.
 화면 예시는 실제 값과 날짜를 비식별화해 UI 구조만 보여준다.
 
 <table>
@@ -633,7 +633,7 @@ DB에서 복구할 수 있다. 이는 단순 자동화 스크립트와 달리 �
   </tr>
   <tr>
     <td>고객 이메일, 결제정보, 게임 키, 원본 장부</td>
-    <td>매입처별 계정·가격·주문 자료와 구매 실행 playbook</td>
+    <td>외부 판매 채널별 계정·가격·주문 자료와 구매 실행 playbook</td>
   </tr>
   <tr>
     <td>구매팀의 <code>SKILL.md</code> 및 실제 스킬 구현</td>
@@ -641,7 +641,7 @@ DB에서 복구할 수 있다. 이는 단순 자동화 스크립트와 달리 �
   </tr>
 </table>
 
-`.gitignore`는 구매팀 스킬과 매입처별 자료가 실수로 추가되지 않도록 경로명 기반 차단 규칙도 포함한다.
+`.gitignore`는 구매팀 스킬과 외부 판매 채널별 자료가 실수로 추가되지 않도록 경로명 기반 차단 규칙도 포함한다.
 공개 저장소에 올리는 파일은 문서 allowlist와 staged diff 검사를 거친다.
 
 ## 검증 명령
@@ -665,7 +665,7 @@ find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 
 </details>
 
-정상 공개 상태에서는 실제 `SKILL.md`, 인증파일, 데이터베이스, 매입처별 파일이 출력되지 않아야 한다.
+정상 공개 상태에서는 실제 `SKILL.md`, 인증파일, 데이터베이스, 외부 판매 채널별 파일이 출력되지 않아야 한다.
 
 ## 현재 상태
 
@@ -673,7 +673,9 @@ find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 - Claw3D 직원 레지스트리와 Hermes 작업공간 연결 구조 반영
 - 직원별 Slack App Manifest와 Socket Mode 연동 계약 정리
 - Django·React·PostgreSQL·n8n·Hermes·Claw3D·브라우저 worker를 포함한 목표 아키텍처 문서화
-- 구매팀 스킬과 매입처별 영업비밀은 저장소에서 제외
+- 상품 장부·회계 장부·계산기·정책·보낸 메일 공개 프런트엔드와 빌드 결과 반영
+- 주문 관제·구매 상태·고객 전달·메일 전달 상태의 공개 운영 계약 반영
+- 구매팀 스킬과 외부 판매 채널별 영업비밀은 저장소에서 제외
 - 저장소는 공개 구조와 비민감 운영 문서에 한정
 
 ## 라이선스
