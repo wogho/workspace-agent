@@ -25,8 +25,8 @@
 </p>
 
 <p align="center">
-  <a href="https://smartstore.naver.com/allupstore">
-    <img src="https://img.shields.io/badge/Smartstore-오픈월드게이밍-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Smartstore 오픈월드게이밍" />
+  <a href="https://smartstore.naver.com/opengamingworld">
+    <img src="https://img.shields.io/badge/Smartstore-오픈게이밍월드-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Smartstore 오픈게이밍월드" />
   </a>
   <a href="https://noong2.tistory.com/">
     <img src="https://img.shields.io/badge/Tistory-눙이의 인프라 메모장-F15A24?style=for-the-badge" alt="눙이의 인프라 메모장" />
@@ -60,7 +60,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
   <table>
     <tr>
       <td align="center" width="50%">
-        <strong><a href="https://smartstore.naver.com/allupstore">Smartstore</a></strong><br>
+        <strong><a href="https://smartstore.naver.com/opengamingworld">Smartstore</a></strong><br>
         <sub>상품·주문·배송이 연결 상거래 표면</sub>
       </td>
       <td align="center" width="50%">
@@ -346,7 +346,7 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
 ### 운영 웹 프런트엔드
 
 장부형 업무 웹의 공개용 React·TypeScript·Vite 소스를 `frontend/`에 정리했다.
-상품 장부, 회계 장부, 가격 계산기·정책 화면과 상대 경로 API 계약을 포함하며,
+상품 장부, 회계 장부, 가격 계산기·정책, 보낸 메일 화면과 상대 경로 API 계약을 포함하며,
 운영 API·인증정보·원본 상품/주문/고객/금융 데이터·매입처 식별자는 포함하지 않는다.
 화면 예시는 실제 값과 날짜를 비식별화해 UI 구조만 보여준다.
 
@@ -356,6 +356,18 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
     <td align="center"><strong>회계 장부</strong><br><sub>월별 대조·판매·정산·세금·입금</sub><br><br><img src="docs/assets/accounting-ledger-ui.png" alt="비식별화한 회계 장부 화면" width="100%"></td>
   </tr>
 </table>
+
+### 주문·구매·메일 운영
+
+최근 서버 변경에서 추가된 주문 관제, 구매 상태, 고객 전달, 메일 전달 상태의
+공개 가능한 계약을 [`docs/operations/order-purchase-mail.md`](docs/operations/order-purchase-mail.md)에
+정리했다. 유일 제약과 실행 임대, 중복 결제 방지, 암호화 키 보관·폐기, 가림 값,
+관리자 권한 게이트, 메일 전달·수신확인 상태를 설명하되 외부 판매 채널 식별자와
+계정·주문·고객 원문은 공개하지 않는다.
+
+공개 프런트엔드의 `보낸 메일` 탭은 수신자·키를 가림 값으로만 표시하고, 전달 상태와
+수신확인 시각을 운영자가 확인하는 화면 계약만 제공한다. 실제 메일 원문과 전달
+자격증명은 서버 런타임에만 존재한다.
 
 ## 17명 AI 직원 조직
 
@@ -466,10 +478,13 @@ workspace-agent/
 │   │   ├── n8n-order-monitor.png
 │   │   ├── product-ledger-ui.png
 │   │   └── workspace-agent-hero.svg
-│   └── skills/
-│       └── accounting/       # 민감정보를 제거한 회계팀 공개 스킬 계약
+│   ├── skills/
+│   │   └── accounting/       # 민감정보를 제거한 회계팀 공개 스킬 계약
+│   └── operations/
+│       └── order-purchase-mail.md  # 주문·구매·메일 공개 운영 계약
 ├── frontend/
 │   ├── src/                  # React 화면·상대 경로 API 계약·스타일
+│   │   └── Mail.tsx          # 가림 값 기반 메일 전달 상태 화면
 │   ├── dist/                 # 정적 빌드 결과
 │   ├── package.json
 │   └── README.md

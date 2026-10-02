@@ -37,3 +37,6 @@ workspace-ss-purchase-*/skills/*
 Thumbs.db
 __pycache__/
 *.py[cod]
+
+# Frontend dependencies
+frontend/node_modules/

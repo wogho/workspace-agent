@@ -195,6 +195,37 @@ ul.changes li:last-child { border-bottom: 0; }
 .calc { margin-top: 8px; font-size: 13px; }
 table.plain { font-size: 13px; }
 
+/* 보낸 메일 */
+main.mail { max-width: 980px; margin: 0 auto; padding: 24px; }
+.mail-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 16px; }
+.mail-head h2 { margin: 0; font-size: 20px; }
+.mail .sub { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
+.mail .note { color: var(--text-2); font-size: 13px; margin: 0 0 12px; }
+.mail-list { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.mail-list .empty { padding: 32px; text-align: center; color: var(--muted); margin: 0; }
+.mail-row { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-top: 1px solid var(--line-2); cursor: pointer; }
+.mail-row:first-child { border-top: 0; }
+.mail-row:hover { background: var(--hover); }
+.mail-row .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; background: #9ca3af; }
+.mail-row .dot.ok { background: #16a34a; }
+.mail-row .dot.wait { background: #f59e0b; }
+.mail-row .dot.bad { background: #dc2626; }
+.mail-main { flex: 1; min-width: 0; }
+.mail-top { display: flex; justify-content: space-between; gap: 12px; }
+.mail-top .when { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.mail-subj { margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mail-meta { margin-top: 2px; color: var(--muted); font-size: 12px; }
+.mail-meta .opened { color: #16a34a; font-weight: 600; }
+.modal-back { position: fixed; inset: 0; background: rgba(0, 0, 0, .45); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.modal.mail-view { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; width: min(640px, 100%); max-height: 90vh; overflow: auto; padding: 20px 22px; }
+.mail-view-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.mail-view-head h3 { margin: 0; font-size: 17px; }
+.mail-view dl { display: grid; grid-template-columns: 90px 1fr; gap: 6px 12px; margin: 16px 0; font-size: 14px; }
+.mail-view dt { color: var(--muted); }
+.mail-view dd { margin: 0; word-break: break-all; }
+.mail-view dd.key { font-family: ui-monospace, Consolas, monospace; font-weight: 700; }
+.mail-body { white-space: pre-wrap; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 14px; font-size: 13px; line-height: 1.6; font-family: inherit; }
+
 /* ── 회계 장부 ── */
 .notice { margin: 12px 0 0; padding: 10px 14px; border-radius: var(--radius); background: var(--warn-bg); color: var(--warn); font-size: 13px; display: grid; gap: 2px; }
 .notice.info-n { background: var(--info-bg); color: var(--info); }
@@ -246,6 +277,8 @@ table.inner { width: auto; min-width: 60%; margin: 4px 0; } table.inner th { pos
 }
 @media (max-width: 700px) {
   nav.top { gap: 10px; padding: 0 12px; } .brand span { display: none; }
+  main.mail { padding: 16px; }
+  .mail-head { flex-direction: column; align-items: stretch; }
   .page { padding: 14px 12px 32px; }
   .ledger-page { padding: 12px 12px 10px; }
   .lp-title .muted { display: none; }
