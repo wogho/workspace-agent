@@ -1,10 +1,12 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { acct, BankRow, Card, CHECK, Doc, Invoice, MonthRow, n, Order, Overview, SettleDay } from "./acctApi";
+import AcctSummary, { PeriodBar } from "./AcctSummary";
 import { day, when, won } from "./api";
 
 /* 회계 장부: 월별 대조 · 판매·정산 · 세금계산서 · 카드 매입 · 부가세 · 문서함 */
 
 const TABS = [
+  { key: "summary", label: "요약" },
   { key: "months", label: "월별 대조" },
   { key: "orders", label: "판매·정산" },
   { key: "invoices", label: "세금계산서" },
@@ -21,8 +23,9 @@ const load = <T,>(k: string, d: T): T => {
 const save = (k: string, v: unknown) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* 저장 불가 환경 */ } };
 
 export default function Accounting() {
-  const [tab, setTab] = useState<Tab>(() => load("acct.tab", "months"));
+  const [tab, setTab] = useState<Tab>(() => load("acct.tab", "summary"));
   const [year, setYear] = useState<number | undefined>(undefined);
+  const [mode, setMode] = useState<"month" | "year" | "all">("month");
   const [ov, setOv] = useState<Overview | null>(null);
   const [month, setMonth] = useState<string>("");
   const [busy, setBusy] = useState(false);
@@ -65,6 +68,7 @@ export default function Accounting() {
           <button className="btn ghost" disabled={busy} onClick={sync} title="최근 40일 판매·정산·부가세 자료를 다시 읽습니다">{busy ? "동기화 중…" : "최근 자료 동기화"}</button>
         </div>
       </header>
+      {ov && <PeriodBar mode={mode} setMode={setMode} year={ov.year} setYear={(value) => setYear(value)} years={ov.years} />}
       {error && <div className="error">{error}</div>}
       {ov && ov.flags.length > 0 && (
         <div className="notice">{ov.flags.map((f, i) => <div key={i}>확인 필요 · {f}</div>)}</div>
@@ -74,6 +78,7 @@ export default function Accounting() {
         {TABS.map((t) => <button key={t.key} className={tab === t.key ? "on" : ""} onClick={() => setTab(t.key)}>{t.label}</button>)}
       </nav>
 
+      {tab === "summary" && ov && <AcctSummary overview={ov} mode={mode} />}
       {tab === "months" && ov && <Months ov={ov} onChanged={refresh} openMonth={openMonth} />}
       {tab === "orders" && <Orders months={months} month={month} setMonth={setMonth} />}
       {tab === "invoices" && <Invoices />}

@@ -369,6 +369,10 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
 수신확인 시각을 운영자가 확인하는 화면 계약만 제공한다. 실제 메일 원문과 전달
 자격증명은 서버 런타임에만 존재한다.
 
+회계 장부의 기간별 요약, 자료 상태, 구매 인계·카드 대조, 예상 수익과 문서함 경계는
+[`docs/operations/accounting-reconciliation.md`](docs/operations/accounting-reconciliation.md)에
+정리했다. 실제 금융자료와 외부 채널 식별자는 운영 서버에만 남긴다.
+
 ## 17명 AI 직원 조직
 
 직원은 프로필 ID, 표시명, 작업공간, 역할 문서로 구성된다. 표시명은 운영 화면에서 식별하기 쉽도록
@@ -481,9 +485,13 @@ workspace-agent/
 │   ├── skills/
 │   │   └── accounting/       # 민감정보를 제거한 회계팀 공개 스킬 계약
 │   └── operations/
-│       └── order-purchase-mail.md  # 주문·구매·메일 공개 운영 계약
+│       ├── accounting-reconciliation.md  # 회계 요약·자료 상태·원가 대조 계약
+│       └── order-purchase-mail.md        # 주문·구매·메일 공개 운영 계약
 ├── frontend/
 │   ├── src/                  # React 화면·상대 경로 API 계약·스타일
+│   │   ├── Dashboard.tsx     # 비민감 통합 관제 화면
+│   │   ├── Orders.tsx        # 가림 값 기반 주문 현황 화면
+│   │   ├── AcctSummary.tsx   # 기간별 회계 요약 화면
 │   │   └── Mail.tsx          # 가림 값 기반 메일 전달 상태 화면
 │   ├── dist/                 # 정적 빌드 결과
 │   ├── package.json
@@ -675,6 +683,8 @@ find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 - Django·React·PostgreSQL·n8n·Hermes·Claw3D·브라우저 worker를 포함한 목표 아키텍처 문서화
 - 상품 장부·회계 장부·계산기·정책·보낸 메일 공개 프런트엔드와 빌드 결과 반영
 - 주문 관제·구매 상태·고객 전달·메일 전달 상태의 공개 운영 계약 반영
+- 통합 관제·주문 현황·기간별 회계 요약·AI 사원·작업 로직의 공개 UI 계약 반영
+- 구매 인계·카드 대조·문서함·예상 수익의 회계 운영 계약 반영
 - 구매팀 스킬과 외부 판매 채널별 영업비밀은 저장소에서 제외
 - 저장소는 공개 구조와 비민감 운영 문서에 한정
 

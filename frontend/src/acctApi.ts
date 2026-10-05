@@ -10,6 +10,9 @@ export type MonthRow = {
 };
 export type Overview = {
   year: number; years: number[]; months: MonthRow[]; total: Record<string, number>; vat: Record<string, number>; flags: string[]; last_sync: string | null;
+  coverage?: {
+    sales: { synced: string | null }; handoff: { count: number }; card: { months: string[] }; bank: { months: string[] }; invoice: { months: string[] };
+  };
 };
 export type Order = {
   product_order_id: string; order_id: string; paid_at: string | null; product_id: string; product_name: string; quantity: number;
