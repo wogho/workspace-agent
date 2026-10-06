@@ -270,7 +270,59 @@ AI 직원에게 범용 SQL이나 무제한 셸 권한을 주지 않고, 다음�
 4. 직원 문서는 역할·허용 범위·중단 조건·인계선을 선언한다.
 5. 실제 민감 스킬은 서버 로컬에서만 연결하며 이 저장소에는 본문을 포함하지 않는다.
 
+### 0.7.2 현재 가동 구성도
+
+`project.md`의 0.7.2 기준 실제 가동 구조를 공개 범위에 맞게 요약하면 다음과 같다.
+n8n은 정기 실행과 연결을 만들고, 업무 웹이 정본 DB와 직원 작업함을 연결한다.
+브라우저 작업은 직원 전용 Chrome 세션과 `ss-*` 업무 도구로 분리하며, Skyvern·
+원본 웹훅 주소·인증정보·운영 경로는 공개하지 않는다.
+
+```mermaid
+flowchart TD
+    NAPI[네이버 커머스 API] <--> WEB
+    N8N[n8n 예약·연결·알림] -->|정기 업무 키| WEB[업무 웹 Django 창구]
+    WEB <--> DB[(PostgreSQL 업무 DB)]
+    WEB -->|작업함| EMP[Hermes AI 직원 17인]
+    EMP -->|업무 단위 도구| TOOLS[ss-* 업무 도구]
+    TOOLS --> CHROME[직원 전용 Chrome·CDP]
+    CHROME --> EXT[승인된 외부 업무 화면]
+    TOOLS --> OBS[비민감 관측 outbox]
+    OBS -->|주기 수집| WEB
+    WEB --> UI[업무 웹 화면·사용자]
+    EMP <--> SLACK[Slack 팀 채널·DM]
+    SLACK <--> USER[사용자 결정·인증 대기]
+    WATCH[서비스·업무 감시] --> ALERT[n8n 알림 흐름] --> SLACK
+    DB --> PACK[지휘본부 점검 자료]
+    PACK --> HQ[COO·CTO·CFO·CSO]
+    HQ --> AUDIT[오탐 판단·감사 기록]
+    AUDIT --> WEB
+```
+
+### 0.7.3 상품·경쟁가 흐름과 오탐 감사
+
+매입처 관측과 네이버 경쟁가 비교는 관측 outbox로 모은 뒤 공통 장부 판정과
+자동 검증을 거친다. 플랫폼팀은 판정 결과를 확인해 상품 상태를 반영하고,
+지휘본부는 검색 근거와 의심 사건을 별도 감사 자료로 대조한다. 공개 레이어에는
+상품번호·판매자·가격 원문·검색 원본·내부 파일 경로를 포함하지 않는다.
+
+```mermaid
+flowchart LR
+    SOURCING[매입처 관측 주기] --> OBS[(관측 outbox)]
+    MARKET[네이버 경쟁가·신규 후보 비교] --> OBS
+    OBS --> LEDGER[공통 장부 판정·마진 규칙]
+    VERIFY[자동 검증·재검색 조건] --> OBS
+    LEDGER --> PLATFORM[플랫폼팀 상품 상태 반영] --> STORE[스마트스토어]
+    OBS --> EVIDENCE[지휘본부 감사 자료]
+    EVIDENCE --> COO[COO 근거 대조]
+    COO --> REVIEW[오탐·미탐 판단 기록]
+    REVIEW --> AUDITS[업무 웹 품질 화면]
+    USERREPORT[사용자 제보] --> OBS
+```
+
 ## 업무 데이터 흐름
+
+아래는 구현체와 교체 가능한 계층 계약을 설명하는 공개 논리 흐름이다.
+현재 서버의 가동 경로와 실행기 구성은 위의 **0.7.2 현재 가동 구성도**가 우선한다.
 
 <div align="center">
   <table>
@@ -295,7 +347,7 @@ flowchart TD
     API -->|사건| H[Hermes AI 사원 17역할: 판단·대응]
     H -->|업무 단위 도구만| API
     H -->|run 단위 판단| BR[브라우저 실행: 전역 임대 1개·주문 P0]
-    BR --> SK[Skyvern workflow: prepare / commit / reconcile]
+    BR --> SK[실행 workflow: prepare / commit / reconcile]
     SK --> BR --> API
     API -->|outbox 사건| N8
     N8 --> SL[Slack: 주문 채널·예외 채널·일일 요약]
@@ -340,6 +392,31 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
   <tr>
     <td align="center"><strong>회계팀 정기 업무</strong><br><sub>자료 점검 → 회계팀 알림</sub><br><br><img src="docs/assets/n8n-accounting-workflows.png" alt="회계팀 정기 업무 자동화 흐름" width="100%"></td>
     <td align="center"><strong>주문관제</strong><br><sub>주문 조회 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-order-monitor.png" alt="주문관제 자동화 흐름" width="100%"></td>
+  </tr>
+</table>
+
+#### 추가 n8n 예약·알림 흐름
+
+제공된 n8n 화면을 역할별 공개 다이어그램으로 추가했다. 캡처의 웹훅 주소와
+Slack endpoint 표기는 공개용 복사본에서 가렸으며, 토큰·인증정보·실행 데이터는
+포함하지 않는다.
+
+<table>
+  <tr>
+    <td align="center"><strong>COO 일일 점검</strong><br><sub>매일 점검 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-coo-daily.png" alt="COO 일일 점검 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>CTO 일일 점검</strong><br><sub>매일 점검 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-cto-daily.png" alt="CTO 일일 점검 n8n 흐름" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>CFO 주간 조언</strong><br><sub>주간 조언 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-cfo-weekly.png" alt="CFO 주간 조언 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>CSO 주간 보고</strong><br><sub>주간 보고 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-cso-weekly.png" alt="CSO 주간 보고 n8n 흐름" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>인프라 재해복구 Terraform</strong><br><sub>정기 실행 → 결과 확인 → 인프라 알림</sub><br><br><img src="docs/assets/n8n-infra-dr-terraform.png" alt="인프라 재해복구 Terraform n8n 흐름" width="100%"></td>
+    <td align="center"><strong>통합 알림 라우팅</strong><br><sub>알림 수신 → 부서 분기 → 팀 응답 확인</sub><br><br><img src="docs/assets/n8n-alert-routing.png" alt="n8n 통합 알림 라우팅 흐름" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>영업 새 상품 발굴</strong><br><sub>3일 주기 발굴 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-sales-discovery.png" alt="영업 새 상품 발굴 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>영업 신규 후보 비교</strong><br><sub>후보 비교 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-sales-market-new.png" alt="영업 신규 후보 비교 n8n 흐름" width="100%"></td>
   </tr>
 </table>
 
@@ -486,9 +563,17 @@ workspace-agent/
 │   ├── assets/
 │   │   ├── accounting-ledger-ui.png
 │   │   ├── n8n-accounting-workflows.png
+│   │   ├── n8n-alert-routing.png
 │   │   ├── employee-network.svg
 │   │   ├── n8n-alert-flow.png
+│   │   ├── n8n-cfo-weekly.png
+│   │   ├── n8n-coo-daily.png
+│   │   ├── n8n-cso-weekly.png
+│   │   ├── n8n-cto-daily.png
+│   │   ├── n8n-infra-dr-terraform.png
 │   │   ├── n8n-order-monitor.png
+│   │   ├── n8n-sales-discovery.png
+│   │   ├── n8n-sales-market-new.png
 │   │   ├── product-ledger-ui.png
 │   │   └── workspace-agent-hero.svg
 │   ├── skills/
