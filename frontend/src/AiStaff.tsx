@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { request } from "./api";
 
-type Employee = { id: string; display_name: string; role: string; team: string; model_label: string; state: string; jobs: number; failed: number };
+type Employee = { id: string; display_name: string; role: string; team: string; model_label: string; state: string; jobs: number; failed: number; skills?: string[] };
 type AiResponse = { employees: Employee[]; model_counts: Record<string, number> };
 
 export default function AiStaff() {
@@ -19,10 +19,11 @@ export default function AiStaff() {
       <div className="usage">{Object.entries(data.model_counts).map(([model, count]) => <span key={model} className="pill info">{model} · {count}명</span>)}</div>
       <div className="pcard">
         <table className="ptable ai-table">
-          <thead><tr><th>사원</th><th>팀</th><th>역할</th><th>모델</th><th>상태</th><th>작업</th></tr></thead>
+          <thead><tr><th>사원</th><th>팀</th><th>역할</th><th>모델</th><th>연결 스킬</th><th>상태</th><th>작업</th></tr></thead>
           <tbody>{data.employees.map((e) => (
             <tr key={e.id}><td><b>{e.display_name}</b><div className="muted small">{e.id}</div></td><td>{e.team}</td><td>{e.role}</td>
-              <td>{e.model_label}</td><td><span className={`pill ${e.state === "working" ? "info" : "muted"}`}>{e.state}</span></td>
+              <td>{e.model_label}</td><td><div className="skill-list">{(e.skills ?? []).map((skill) => <span className="skill-chip" key={skill}>{skill}</span>)}</div></td>
+              <td><span className={`pill ${e.state === "working" ? "info" : "muted"}`}>{e.state}</span></td>
               <td>{e.jobs}건{e.failed ? <span className="bad-t"> · 실패 {e.failed}</span> : ""}</td></tr>
           ))}</tbody>
         </table>

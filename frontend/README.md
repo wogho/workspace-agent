@@ -7,11 +7,13 @@ React + TypeScript + Vite로 만든 장부형 업무 화면의 공개용 소스�
 - `src/main.tsx`: 통합 관제·주문 현황·상품 장부·보낸 메일·회계 장부·계산기/정책·AI 사원·작업 로직 탭과 로그아웃
 - `src/Dashboard.tsx`: 비민감 구성요소 상태·문제·업무 지표 관제
 - `src/Orders.tsx`: 주문 끝자리·상태·구매·전달 상태 목록
+- `src/Changes.tsx`: 상품 변동 기록의 읽기 전용 공개 계약
+- `src/Audits.tsx`: 오탐·미탐 품질 기록의 읽기 전용 공개 계약
 - `src/Ledger.tsx`: 상품 상태·재고·가격·마진 관측과 사용자 결정 기록
 - `src/Accounting.tsx`: 월별 대조·판매/정산·세금 문서·입금·카드 매입·부가세·문서함
 - `src/AcctSummary.tsx`: 기간별 회계 요약과 자료 수집 상태
 - `src/Calculator.tsx`: 가격 계산과 정책 표시
-- `src/AiStaff.tsx`: 역할·팀·모델 라벨과 실행 집계
+- `src/AiStaff.tsx`: 역할·팀·모델 라벨·연결 스킬 이름과 실행 집계
 - `src/Logic.tsx`: 사건 인계와 예약 주기 공개 계약
 - `src/Mail.tsx`: 가림 값 기반 메일 전달 상태·수신확인·전달 처리 화면
 - `src/api.ts`, `src/acctApi.ts`: 상대 경로 API 계약과 CSRF 요청 처리

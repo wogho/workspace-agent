@@ -2,7 +2,9 @@ import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import Accounting from "./Accounting";
 import AiStaff from "./AiStaff";
+import Audits from "./Audits";
 import Calculator from "./Calculator";
+import Changes from "./Changes";
 import Dashboard from "./Dashboard";
 import Ledger from "./Ledger";
 import Logic from "./Logic";
@@ -11,7 +13,7 @@ import Orders from "./Orders";
 import "./styles.css";
 
 const MENU = [
-  ["dash", "통합 관제"], ["orders", "주문 현황"], ["ledger", "상품 장부"], ["mail", "보낸 메일"],
+  ["dash", "통합 관제"], ["orders", "주문 현황"], ["ledger", "상품 장부"], ["changes", "상품 변동"], ["audits", "오탐 내역"], ["mail", "보낸 메일"],
   ["acct", "회계 장부"], ["calc", "계산기 · 정책"], ["ai", "AI 사원 · 모델"], ["logic", "작업 로직 · 설정"],
 ] as const;
 type Tab = (typeof MENU)[number][0];
@@ -40,7 +42,7 @@ function App() {
           <button>로그아웃</button>
         </form>
       </nav>
-      {tab === "dash" ? <Dashboard /> : tab === "orders" ? <Orders /> : tab === "ledger" ? <Ledger /> : tab === "mail" ? <Mail />
+      {tab === "dash" ? <Dashboard /> : tab === "orders" ? <Orders /> : tab === "ledger" ? <Ledger /> : tab === "changes" ? <Changes /> : tab === "audits" ? <Audits /> : tab === "mail" ? <Mail />
         : tab === "acct" ? <Accounting /> : tab === "calc" ? <Calculator /> : tab === "ai" ? <AiStaff /> : <Logic />}
     </>
   );

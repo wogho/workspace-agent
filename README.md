@@ -373,6 +373,15 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
 [`docs/operations/accounting-reconciliation.md`](docs/operations/accounting-reconciliation.md)에
 정리했다. 실제 금융자료와 외부 채널 식별자는 운영 서버에만 남긴다.
 
+2026-10-06 서버 업데이트에서 추가된 상품 변동·오탐 내역 화면은 읽기 전용 공개 계약으로
+반영했다. 사원별 모델 라벨과 연결 스킬 이름은
+[`docs/operations/employee-skill-catalog.md`](docs/operations/employee-skill-catalog.md)에,
+백업·복원 시험 확인 규칙은
+[`docs/skills/infrastructure/ss-backup-restore-check.md`](docs/skills/infrastructure/ss-backup-restore-check.md)에
+정리했다. 상품 제외·사용자 대기·오탐/미탐·증거 품질 규칙은
+[`docs/operations/ledger-quality.md`](docs/operations/ledger-quality.md)에 정리했다.
+스킬 원문과 운영 자료는 공개하지 않는다.
+
 ## 17명 AI 직원 조직
 
 직원은 프로필 ID, 표시명, 작업공간, 역할 문서로 구성된다. 표시명은 운영 화면에서 식별하기 쉽도록
@@ -483,14 +492,20 @@ workspace-agent/
 │   │   ├── product-ledger-ui.png
 │   │   └── workspace-agent-hero.svg
 │   ├── skills/
-│   │   └── accounting/       # 민감정보를 제거한 회계팀 공개 스킬 계약
+│   │   ├── accounting/       # 민감정보를 제거한 회계팀 공개 스킬 계약
+│   │   └── infrastructure/
+│   │       └── ss-backup-restore-check.md # 백업·복원 확인 계약
 │   └── operations/
+│       ├── employee-skill-catalog.md     # 사원별 모델·스킬 이름 카탈로그
 │       ├── accounting-reconciliation.md  # 회계 요약·자료 상태·원가 대조 계약
+│       ├── ledger-quality.md             # 상품 변동·오탐 품질 계약
 │       └── order-purchase-mail.md        # 주문·구매·메일 공개 운영 계약
 ├── frontend/
 │   ├── src/                  # React 화면·상대 경로 API 계약·스타일
 │   │   ├── Dashboard.tsx     # 비민감 통합 관제 화면
 │   │   ├── Orders.tsx        # 가림 값 기반 주문 현황 화면
+│   │   ├── Changes.tsx       # 상품 변동 읽기 전용 화면
+│   │   ├── Audits.tsx        # 오탐 내역 읽기 전용 화면
 │   │   ├── AcctSummary.tsx   # 기간별 회계 요약 화면
 │   │   └── Mail.tsx          # 가림 값 기반 메일 전달 상태 화면
 │   ├── dist/                 # 정적 빌드 결과
@@ -684,6 +699,8 @@ find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 - 상품 장부·회계 장부·계산기·정책·보낸 메일 공개 프런트엔드와 빌드 결과 반영
 - 주문 관제·구매 상태·고객 전달·메일 전달 상태의 공개 운영 계약 반영
 - 통합 관제·주문 현황·기간별 회계 요약·AI 사원·작업 로직의 공개 UI 계약 반영
+- 상품 변동·오탐 내역의 읽기 전용 공개 UI 계약 반영
+- 사원별 연결 스킬 카탈로그와 백업·복원 확인 스킬의 비민감 계약 반영
 - 구매 인계·카드 대조·문서함·예상 수익의 회계 운영 계약 반영
 - 구매팀 스킬과 외부 판매 채널별 영업비밀은 저장소에서 제외
 - 저장소는 공개 구조와 비민감 운영 문서에 한정
