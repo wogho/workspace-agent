@@ -459,6 +459,12 @@ Slack endpoint 표기는 공개용 복사본에서 가렸으며, 토큰·인증�
 [`docs/operations/ledger-quality.md`](docs/operations/ledger-quality.md)에 정리했다.
 스킬 원문과 운영 자료는 공개하지 않는다.
 
+2026-10-07~10-10 서버 변경은
+[`docs/operations/current-server-updates-2026-10-10.md`](docs/operations/current-server-updates-2026-10-10.md)에
+공개 가능한 운영 계약으로 요약했다. Chrome 기반 실행·인프라 복구·사용량/토큰 기록·
+예외 중심 상품 관측·발굴 연쇄·상품별 비교 주기·가격/포트폴리오·주문별 회계 대조·
+외부 반영 재확인 원칙을 다루며, 실행 원본과 민감정보는 포함하지 않는다.
+
 ## 17명 AI 직원 조직
 
 직원은 프로필 ID, 표시명, 작업공간, 역할 문서로 구성된다. 표시명은 운영 화면에서 식별하기 쉽도록
@@ -584,7 +590,8 @@ workspace-agent/
 │       ├── employee-skill-catalog.md     # 사원별 모델·스킬 이름 카탈로그
 │       ├── accounting-reconciliation.md  # 회계 요약·자료 상태·원가 대조 계약
 │       ├── ledger-quality.md             # 상품 변동·오탐 품질 계약
-│       └── order-purchase-mail.md        # 주문·구매·메일 공개 운영 계약
+│       ├── order-purchase-mail.md        # 주문·구매·메일 공개 운영 계약
+│       └── current-server-updates-2026-10-10.md # 최신 서버 변경 공개 요약
 ├── frontend/
 │   ├── src/                  # React 화면·상대 경로 API 계약·스타일
 │   │   ├── Dashboard.tsx     # 비민감 통합 관제 화면
@@ -787,6 +794,7 @@ find . -type f \( -name '.env' -o -name '*.sqlite3' -o -name '*.lock' \) -print
 - 상품 변동·오탐 내역의 읽기 전용 공개 UI 계약 반영
 - 사원별 연결 스킬 카탈로그와 백업·복원 확인 스킬의 비민감 계약 반영
 - 구매 인계·카드 대조·문서함·예상 수익의 회계 운영 계약 반영
+- 최신 서버의 Chrome 실행·복구·사용량·관측·발굴·가격·포트폴리오 운영 변경 요약 반영
 - 구매팀 스킬과 외부 판매 채널별 영업비밀은 저장소에서 제외
 - 저장소는 공개 구조와 비민감 운영 문서에 한정
 
