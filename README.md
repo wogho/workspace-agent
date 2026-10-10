@@ -44,7 +44,7 @@ Smartstore 운영을 위한 AI 직원 조직과 Hermes·Claw3D 연동 구성을 
       <td align="center"><strong>5</strong><br><sub>표준 직원 문서</sub></td>
       <td align="center"><strong>1</strong><br><sub>DB 정본</sub></td>
       <td align="center"><strong>3</strong><br><sub>브라우저 실행 단계</sub></td>
-      <td align="center"><strong>3</strong><br><sub>Gemini 계정 수</sub></td>
+      <td align="center"><strong>4</strong><br><sub>agy Gemini 계정 수</sub></td>
       <td align="center"><strong>0</strong><br><sub>공개 운영 비밀</sub></td>
     </tr>
   </table>
@@ -127,7 +127,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
     <tr>
       <td align="center"><strong>브라우저·<br/>운영</strong></td>
       <td align="center"><img src="https://cdn.simpleicons.org/googlechrome/4285F4" width="32" alt="Chromium" /><br/><sub>Chromium</sub></td>
-      <td align="center"><img src="https://img.shields.io/badge/Skyvern-0F172A?style=flat-square&logoColor=white" height="32" alt="Skyvern" /><br/><sub>Skyvern</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Chrome%2FCDP-4285F4?style=flat-square&logo=googlechrome&logoColor=white" height="32" alt="Chrome CDP" /><br/><sub>Chrome/CDP</sub></td>
       <td align="center"><img src="https://cdn.simpleicons.org/ubuntu/E95420" width="32" alt="Ubuntu" /><br/><sub>Ubuntu</sub></td>
       <td align="center"><img src="https://cdn.simpleicons.org/python/3776AB" width="32" alt="Python" /><br/><sub>Python</sub></td>
       <td align="center"><img src="https://cdn.simpleicons.org/git/F05032" width="32" alt="Git" /><br/><sub>Git</sub></td>
@@ -157,7 +157,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
       <td><strong>State</strong><br><sub>PostgreSQL · 상태·감사·정합성</sub></td>
     </tr>
     <tr>
-      <td><strong>Execution</strong><br><sub>Chromium · Skyvern · 브라우저 경계</sub></td>
+      <td><strong>Execution</strong><br><sub>Chromium · Chrome/CDP · 브라우저 경계</sub></td>
       <td><strong>Decision Gate</strong><br><sub>Slack Socket Mode · 승인·예외</sub></td>
       <td><strong>Operations</strong><br><sub>Claw3D · Kanban · WebSocket</sub></td>
     </tr>
@@ -174,7 +174,7 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
 | AI 직원 런타임 | **Hermes Agent** | 역할 문서, 세션, 도구 호출, 인계, 승인 흐름 | 17개 프로필을 독립 실행 단위로 분리한다 |
 | 직원 운영 화면 | **Claw3D + Kanban** | 직원 레지스트리, 세션, 작업 카드, 인계 상태 | WebSocket 기반 레지스트리와 작업공간을 연결한다 |
 | 주 브라우저 자동화 | **agy/Antigravity browser worker** | 동적 웹 화면 해석과 브라우저 행동 | 화면 조작을 업무 판단과 분리한 전용 실행 계층이다 |
-| 보조 브라우저 자동화 | **Self-hosted Skyvern** | 주 브라우저 장애 시 예비 실행, 격리 로그인 검토 | `prepare / commit / reconcile` 단계로 실행 결과를 구분한다 |
+| 브라우저 실행 계층 | **Chrome/CDP + `ss-*` 도구** | 역할별 세션과 화면 조회·행동 실행 | 로그인·구매·보안 확인을 우회하지 않고 실행과 판단을 분리한다 |
 | 브라우저 기반 | **Chromium** | 직원별 로그인 세션과 로컬 headless 실행 | 브라우저별 세션·권한·작업 범위를 분리한다 |
 | 메시징·결정 게이트 | **Slack Socket Mode** | 정상 진행, 예외, 중단, 사용자 결정 | 키·이메일 원문·결제정보를 메시지에 넣지 않는다 |
 | 메일 계층 | **SMTP/자체 메일 연동** | 업무 결과 전달과 반송 수집 | 발송 결과를 외부 식별자와 함께 기록한다 |
@@ -274,8 +274,8 @@ AI 직원에게 범용 SQL이나 무제한 셸 권한을 주지 않고, 다음�
 
 `project.md`의 0.7.2 기준 실제 가동 구조를 공개 범위에 맞게 요약하면 다음과 같다.
 n8n은 정기 실행과 연결을 만들고, 업무 웹이 정본 DB와 직원 작업함을 연결한다.
-브라우저 작업은 직원 전용 Chrome 세션과 `ss-*` 업무 도구로 분리하며, Skyvern·
-원본 웹훅 주소·인증정보·운영 경로는 공개하지 않는다.
+브라우저 작업은 직원 전용 Chrome 세션과 `ss-*` 업무 도구로 분리한다. Skyvern은
+철수·제거되어 현재 운영 경로에 없으며, 원본 웹훅 주소·인증정보·운영 경로는 공개하지 않는다.
 
 ```mermaid
 flowchart TD
@@ -464,6 +464,32 @@ Slack endpoint 표기는 공개용 복사본에서 가렸으며, 토큰·인증�
 공개 가능한 운영 계약으로 요약했다. Chrome 기반 실행·인프라 복구·사용량/토큰 기록·
 예외 중심 상품 관측·발굴 연쇄·상품별 비교 주기·가격/포트폴리오·주문별 회계 대조·
 외부 반영 재확인 원칙을 다루며, 실행 원본과 민감정보는 포함하지 않는다.
+
+### AI 모델·계정 구성
+
+현재 가동 구성을 모델 제공자와 역할별로 나누면 다음과 같다. 계정 이름·이메일·잔여량·
+인증 상태는 공개하지 않고, 계정 수와 역할 배정 구조만 공개한다.
+
+```mermaid
+flowchart LR
+    HQ[지휘본부 4명<br/>COO · CTO · CFO · CSO] --> CP[GitHub Copilot<br/>GPT-6 Luna]
+    OPS[실무·지원 13명<br/>플랫폼 · 영업 · 구매 · 회계 · 경리 · 인프라] --> G[agy<br/>Gemini 3.8 Flash High]
+    G --> PRIMARY[주 계정 2개<br/>Hermes · Accounting]
+    G --> BACKUP[백업 계정 2개<br/>소진·한도 부족 시 순차 전환]
+    PRIMARY --> USAGE[10분 주기 사용량 확인]
+    BACKUP --> USAGE
+    USAGE --> ALERT[한도 부족·소진·회복 알림]
+    CP --> TOKENS[실행 사용량 기록<br/>제공된 값만 기록]
+    G --> TOKENS
+```
+
+- 전체 AI 논리 직원은 17명이며, 모델 배정은 **Copilot 4명 + Gemini 13명**이다.
+- Gemini 계열 agy 계정은 **총 4개(주 2개·백업 2개)**로 운영한다. 주 계정 소진이나
+  실행 중 한도 오류가 확인되면 백업 풀에서 남은 사용량이 많은 계정을 우선 사용한다.
+- `ss-agy-usage`가 계정별 Gemini·Claude/GPT 묶음의 사용량을 읽지만, 이 저장소에는
+  계정 식별자·이메일·토큰·실제 잔여량을 저장하지 않는다.
+- Skyvern은 과거 보조 실행기였으나 철수·제거되었고, 현재 화면 실행은 Chrome/CDP와
+  `ss-*` 도구만 사용한다.
 
 ## 17명 AI 직원 조직
 
