@@ -449,44 +449,61 @@ JSON Lines outbox에 append한다. 별도 전송기(`ss_alert_watch.py`)는 curs
 알린다. 이 사건의 진행 알림은 담당 팀 채널에서 사건별 한 스레드로 묶는다.
 
 <p align="center">
-  <img src="docs/assets/n8n-alert-flow.png" alt="자동화 알림 워크플로 실행 화면" width="100%">
+  <img src="docs/assets/n8n/ssAlertsToMason1.png" alt="통합 알림 라우팅 n8n 흐름" width="100%">
 </p>
 
-### 회계·주문관제 자동화 예시
+### n8n 워크플로 구성도
 
-회계팀의 정기 자료 점검과 주문관제의 주기 조회는 각각 독립된 자동화 흐름으로
-운영된다. 공개 이미지는 노드 연결과 책임 경계만 보여주며, 접속 주소·토큰·인증정보·
-실행 데이터는 포함하지 않는다.
+운영 중인 n8n 워크플로 16개(모두 활성)의 구성도다. `ss-n8n-snapshot`이 운영 n8n에서 워크플로를
+내보내 노드 이름·종류·연결과 HTTP 대상 종류(업무 API·Slack API)만 남긴 뒤, 같은 서버의 n8n
+미리보기 화면에서 다크 테마로 자동 캡처한다. 코드·URL 경로·헤더·채널 ID·자격증명·실행 데이터는
+그림에 들어가지 않으며, 워크플로가 바뀌면 바뀐 것만 다시 그린다.
 
-<table>
-  <tr>
-    <td align="center"><strong>회계팀 정기 업무</strong><br><sub>자료 점검 → 회계팀 알림</sub><br><br><img src="docs/assets/n8n-accounting-workflows.png" alt="회계팀 정기 업무 자동화 흐름" width="100%"></td>
-    <td align="center"><strong>주문관제</strong><br><sub>주문 조회 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-order-monitor.png" alt="주문관제 자동화 흐름" width="100%"></td>
-  </tr>
-</table>
-
-#### 추가 n8n 예약·알림 흐름
-
-제공된 n8n 화면을 역할별 공개 다이어그램으로 추가했다. 캡처의 웹훅 주소와
-Slack endpoint 표기는 공개용 복사본에서 가렸으며, 토큰·인증정보·실행 데이터는
-포함하지 않는다.
+대부분의 예약 흐름은 같은 모양이다: **예약 트리거 → 업무 API에 작업 키 전달 → 결과 확인 → 실패 시
+#ss-인프라팀 알림 → 알림 전달 확인.** 업무 판단은 업무 API 뒤의 AI 직원이 하고, n8n은 시각과 연결만
+맡는다.
 
 <table>
+  <tr><td colspan="2"><strong>주문·구매</strong></td></tr>
   <tr>
-    <td align="center"><strong>COO 일일 점검</strong><br><sub>매일 점검 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-coo-daily.png" alt="COO 일일 점검 n8n 흐름" width="100%"></td>
-    <td align="center"><strong>CTO 일일 점검</strong><br><sub>매일 점검 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-cto-daily.png" alt="CTO 일일 점검 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>주문 조회</strong><br><sub>2분마다 → 주문 관제(Emma)</sub><br><br><img src="docs/assets/n8n/ssOrderPoll0001.png" alt="주문 조회 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>구매 모니터링 점검</strong><br><sub>08:00·16:00 → Lucas</sub><br><br><img src="docs/assets/n8n/ssPurchHealth01.png" alt="구매 모니터링 점검 n8n 흐름" width="100%"></td>
+  </tr>
+  <tr><td colspan="2"><strong>영업</strong></td></tr>
+  <tr>
+    <td align="center"><strong>매입처 관측</strong><br><sub>매시간 → Noah</sub><br><br><img src="docs/assets/n8n/ssSalesSrc001.png" alt="매입처 관측 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>네이버 가격 비교</strong><br><sub>2시간마다 → Ava</sub><br><br><img src="docs/assets/n8n/ssSalesMkt001.png" alt="네이버 가격 비교 n8n 흐름" width="100%"></td>
   </tr>
   <tr>
-    <td align="center"><strong>CFO 주간 조언</strong><br><sub>주간 조언 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-cfo-weekly.png" alt="CFO 주간 조언 n8n 흐름" width="100%"></td>
-    <td align="center"><strong>CSO 주간 보고</strong><br><sub>주간 보고 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-cso-weekly.png" alt="CSO 주간 보고 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>새 상품 발굴 연쇄</strong><br><sub>5분마다 확인 → Noah</sub><br><br><img src="docs/assets/n8n/ssSalesDisc001.png" alt="새 상품 발굴 연쇄 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>신규 후보 비교</strong><br><sub>발굴 라운드 직후 → Ava</sub><br><br><img src="docs/assets/n8n/ssSalesNew0001.png" alt="신규 후보 비교 n8n 흐름" width="100%"></td>
+  </tr>
+  <tr><td colspan="2"><strong>플랫폼</strong></td></tr>
+  <tr>
+    <td align="center"><strong>플랫폼 장부 갱신</strong><br><sub>3시간마다 → Mia</sub><br><br><img src="docs/assets/n8n/ssPlatLedger01.png" alt="플랫폼 장부 갱신 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>등록 후보 바로 등록</strong><br><sub>5분마다 확인·순차 → Mia</sub><br><br><img src="docs/assets/n8n/ssPlatRegNow01.png" alt="등록 후보 바로 등록 n8n 흐름" width="100%"></td>
+  </tr>
+  <tr><td colspan="2"><strong>회계·지휘본부</strong></td></tr>
+  <tr>
+    <td align="center"><strong>회계팀 정기 업무</strong><br><sub>월초·월 마감·연간 신고 → Henry·Nora</sub><br><br><img src="docs/assets/n8n/ssAcctSchedule1.png" alt="회계팀 정기 업무 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>COO 일일 점검</strong><br><sub>매일 17:00 → Olivia</sub><br><br><img src="docs/assets/n8n/ssHqCooDaily001.png" alt="COO 일일 점검 n8n 흐름" width="100%"></td>
   </tr>
   <tr>
-    <td align="center"><strong>인프라 재해복구 Terraform</strong><br><sub>정기 실행 → 결과 확인 → 인프라 알림</sub><br><br><img src="docs/assets/n8n-infra-dr-terraform.png" alt="인프라 재해복구 Terraform n8n 흐름" width="100%"></td>
-    <td align="center"><strong>통합 알림 라우팅</strong><br><sub>알림 수신 → 부서 분기 → 팀 응답 확인</sub><br><br><img src="docs/assets/n8n-alert-routing.png" alt="n8n 통합 알림 라우팅 흐름" width="100%"></td>
+    <td align="center"><strong>CTO 일일 점검</strong><br><sub>매일 17:00 → Ethan</sub><br><br><img src="docs/assets/n8n/ssHqCtoDaily001.png" alt="CTO 일일 점검 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>CFO 주간 조언</strong><br><sub>월 17:00 → Sophia</sub><br><br><img src="docs/assets/n8n/ssHqCfoWeekly01.png" alt="CFO 주간 조언 n8n 흐름" width="100%"></td>
   </tr>
   <tr>
-    <td align="center"><strong>영업 새 상품 발굴</strong><br><sub>3일 주기 발굴 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-sales-discovery.png" alt="영업 새 상품 발굴 n8n 흐름" width="100%"></td>
-    <td align="center"><strong>영업 신규 후보 비교</strong><br><sub>후보 비교 → 결과 확인 → 실패 알림</sub><br><br><img src="docs/assets/n8n-sales-market-new.png" alt="영업 신규 후보 비교 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>CSO 주간 보고</strong><br><sub>월 17:00 → Daniel</sub><br><br><img src="docs/assets/n8n/ssHqCsoWeekly01.png" alt="CSO 주간 보고 n8n 흐름" width="100%"></td>
+    <td></td>
+  </tr>
+  <tr><td colspan="2"><strong>인프라·알림</strong></td></tr>
+  <tr>
+    <td align="center"><strong>일일 백업·복원 점검</strong><br><sub>매일 05:00 → Liam</sub><br><br><img src="docs/assets/n8n/ssInfraBackupDaily01.png" alt="일일 백업·복원 점검 n8n 흐름" width="100%"></td>
+    <td align="center"><strong>재해 복구 Terraform</strong><br><sub>3일마다 04:00 → Liam</sub><br><br><img src="docs/assets/n8n/ssInfraDr3d0001.png" alt="재해 복구 Terraform n8n 흐름" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>통합 알림 라우팅</strong><br><sub>알림 수신 → 팀별 분기 → 응답 확인</sub><br><br><img src="docs/assets/n8n/ssAlertsToMason1.png" alt="통합 알림 라우팅 n8n 흐름" width="100%"></td>
+    <td></td>
   </tr>
 </table>
 
@@ -664,18 +681,8 @@ workspace-agent/
 ├── docs/
 │   ├── assets/
 │   │   ├── accounting-ledger-ui.png
-│   │   ├── n8n-accounting-workflows.png
-│   │   ├── n8n-alert-routing.png
 │   │   ├── employee-network.svg
-│   │   ├── n8n-alert-flow.png
-│   │   ├── n8n-cfo-weekly.png
-│   │   ├── n8n-coo-daily.png
-│   │   ├── n8n-cso-weekly.png
-│   │   ├── n8n-cto-daily.png
-│   │   ├── n8n-infra-dr-terraform.png
-│   │   ├── n8n-order-monitor.png
-│   │   ├── n8n-sales-discovery.png
-│   │   ├── n8n-sales-market-new.png
+│   │   ├── n8n/                  # 워크플로 16개 구성도(ss-n8n-snapshot 자동 생성, 다크 테마)
 │   │   ├── product-ledger-ui.png
 │   │   └── workspace-agent-hero.svg
 │   ├── skills/
