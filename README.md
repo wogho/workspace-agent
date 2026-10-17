@@ -20,6 +20,7 @@
 <p align="center">
   <a href="#기술-스택">기술 스택</a> ·
   <a href="#전체-구성도">구성도</a> ·
+  <a href="#cloudflare-turnstile-대응-구성">Turnstile 대응</a> ·
   <a href="#17명-ai-직원-조직">AI 직원 조직</a> ·
   <a href="#공개-범위와-보안-정책">공개 범위</a>
 </p>
@@ -133,6 +134,14 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
       <td align="center"><img src="https://cdn.simpleicons.org/git/F05032" width="32" alt="Git" /><br/><sub>Git</sub></td>
     </tr>
     <tr>
+      <td align="center"><strong>보안확인<br/>대응</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/Stage%201-Gemini%20Computer%20Use-4285F4?style=flat-square&logo=google&logoColor=white" height="32" alt="Gemini Computer Use" /><br/><sub>1차 Gemini Computer Use</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Stage%202-Hermes%20Browser-111827?style=flat-square" height="32" alt="Hermes Browser" /><br/><sub>2차 Hermes Browser</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Stage%203-Byparr-7C3AED?style=flat-square" height="32" alt="Byparr" /><br/><sub>3차 Byparr</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Handoff-Watcher-0F766E?style=flat-square" height="32" alt="Handoff watcher" /><br/><sub>인계 감시기</sub></td>
+      <td align="center"><img src="https://img.shields.io/badge/Alert-Slack-4A154B?style=flat-square&logo=slack&logoColor=white" height="32" alt="Slack stage alerts" /><br/><sub>단계별 Slack 알림</sub></td>
+    </tr>
+    <tr>
       <td align="center"><strong>업무<br/>연동</strong></td>
       <td align="center"><img src="https://cdn.simpleicons.org/curl/073551" width="32" alt="HTTP API" /><br/><sub>HTTP API</sub></td>
       <td align="center"><img src="https://img.shields.io/badge/Webhook-4285F4?style=flat-square" height="32" alt="Webhook" /><br/><sub>Webhook</sub></td>
@@ -181,8 +190,11 @@ Hermes는 역할별 판단, 브라우저 실행기는 화면 조작, Slack은 �
 | 워크플로 오케스트레이션 | **n8n** | API polling, 예약, 연결, Slack·메일 알림 | 거래 상태의 정본이 아니라 트리거·연결 계층으로 제한한다 |
 | AI 직원 런타임 | **Hermes Agent** | 역할 문서, 세션, 도구 호출, 인계, 승인 흐름 | 17개 프로필을 독립 실행 단위로 분리한다 |
 | 직원 운영 화면 | **Claw3D + Kanban** | 직원 레지스트리, 세션, 작업 카드, 인계 상태 | WebSocket 기반 레지스트리와 작업공간을 연결한다 |
-| 주 브라우저 자동화 | **agy/Antigravity browser worker** | 동적 웹 화면 해석과 브라우저 행동 | 화면 조작을 업무 판단과 분리한 전용 실행 계층이다 |
-| 브라우저 실행 계층 | **Chrome/CDP + `ss-*` 도구** | 역할별 세션과 화면 조회·행동 실행 | 로그인·결제 인증은 우회하지 않고, 실행과 판단을 분리한다. 외부 사이트 확인 화면이 나타나면 코드 관측을 멈추고 자동 감시기가 처리하며, 처리하지 못하면 인프라 담당에게 알린다 |
+| 기본 브라우저 관측 | **Chrome/CDP + `ss-*` 도구** | 역할별 세션과 정형화된 화면 조회 | 보안확인 화면을 감지하면 코드 작업을 중단하고 기존 탭과 작업 상태를 인계한다 |
+| 보안확인 1차 | **Gemini Computer Use** | 기존 브라우저 세션의 첫 번째 시각 대응 | 기존 세션과 탭을 유지한 채 화면을 직접 확인한다 |
+| 보안확인 2차 | **Hermes Browser** | 기존 브라우저 세션의 두 번째 시각 대응 | 1차와 같은 실행 잠금이 계속 사용 중이면 중복 대기하지 않고 3차로 전환한다 |
+| 보안확인 3차 | **Byparr** | 격리 브라우저를 이용한 보조 확인 | 개별 브라우저의 성공만으로 원 작업을 완료하지 않고, 기존 탭의 정상 복귀를 별도로 검증한다 |
+| 보안확인 인계·감시 | **Python watcher + systemd + 상태 기록** | 사건 상태, 단계 전환, 장기 대기, 재개 추적 | 단계별 결과를 기록하고 Slack에 1차·2차·3차를 표시하며, 기존 작업은 검증 후 한 번만 재개한다 |
 | 브라우저 기반 | **Chromium** | 직원별 로그인 세션과 로컬 headless 실행 | 브라우저별 세션·권한·작업 범위를 분리한다 |
 | 메시징·결정 게이트 | **Slack Socket Mode** | 정상 진행, 예외, 중단, 사용자 결정 | 키·이메일 원문·결제정보를 메시지에 넣지 않는다 |
 | 메일 계층 | **SMTP/자체 메일 연동** | 업무 결과 전달과 반송 수집 | 발송 결과를 외부 식별자와 함께 기록한다 |
@@ -227,6 +239,47 @@ AI 직원에게 범용 SQL이나 무제한 셸 권한을 주지 않고, 다음�
 
 브라우저 worker는 화면을 읽고 정해진 행동을 수행한다. Hermes 직원은 실행 결과를 해석해 계속 진행할지,
 중단할지, 예외로 전환할지 판단한다. 두 계층을 분리해 화면 자동화 변경이 업무 정책 전체를 바꾸지 않도록 한다.
+
+### Cloudflare Turnstile 대응 구성
+
+정상 관측 중 Cloudflare Turnstile 보안확인이 감지되면 현재 코드 작업을 중단하고 기존 브라우저 세션과
+탭을 보존한다. 코드와 CDP는 감지·상태 기록·작업 인계·복구 검증을 담당하고, 보안확인 화면의 상호작용은
+시각 브라우저 단계가 담당한다.
+
+```mermaid
+flowchart TD
+    RUN[정상 Chrome/CDP 관측] --> DETECT{Turnstile 보안확인 감지?}
+    DETECT -->|아니요| RUN
+    DETECT -->|예| PAUSE[현재 코드 작업 중단<br/>기존 세션·탭·작업 위치 보존]
+    PAUSE --> STATE[인계 사건 기록<br/>주기 감시 시작]
+    STATE --> G[1차 Gemini Computer Use<br/>기존 탭 시각 대응]
+    G -->|성공| WATCH[기존 탭 복귀 검증]
+    G -->|일반 실패| H[2차 Hermes Browser<br/>기존 탭 시각 대응]
+    G -->|공유 잠금 지속| SKIP[2차 중복 대기 생략]
+    H -->|성공| WATCH
+    H -->|실패| B[3차 Byparr<br/>격리 브라우저 보조 확인]
+    SKIP --> B
+    B --> WATCH
+    WATCH --> CHECK{대상 화면과 판매 정보가<br/>반복 확인되는가?}
+    CHECK -->|아니요| PENDING[진행 상태 유지<br/>재시도·장기 대기 알림]
+    PENDING --> STATE
+    CHECK -->|예| COMPLETE[사건 완료 기록<br/>중단 작업 한 번만 재개]
+    COMPLETE --> REPORT[업무 완료<br/>단계별 Slack 결과 알림]
+```
+
+| 단계 | 실행 경계 | 성공·전환 기준 |
+|---|---|---|
+| **1차 Gemini** | 기존 브라우저 탭 | 시각적으로 보안확인을 처리한다. 실행 잠금이 계속 점유되면 정해진 상한까지만 기다린다 |
+| **2차 Hermes** | 1차와 같은 기존 브라우저 탭 | 1차의 일반 실패 뒤 실행한다. 같은 실행 잠금이 계속 막혀 있으면 중복 대기 없이 3차로 전환한다 |
+| **3차 Byparr** | 기존 탭과 분리된 개별 브라우저 | 앞 단계가 처리하지 못한 경우 페이지 접근과 상태를 보조 확인한다. 이 단계의 성공만으로 기존 작업을 재개하지 않는다 |
+
+완료 판정은 백업 브라우저의 성공 문구가 아니라 **원래 탭의 정상 복귀**를 기준으로 한다. 감시기는 대상 화면의
+주소·제목·구조화된 판매 정보가 일관되게 확인된 뒤 사건을 완료하고, 보존한 원래 작업을 한 번만 재개한다.
+앞 사건의 재개가 끝나기 전에 새 보안확인이 생기면 앞 사건의 재개 상태를 별도로 보존해 두 사건이 서로
+덮어쓰지 않도록 한다. 단계 시작·성공·실패·전환·장기 대기·업무 재개 결과는 같은 사건의 Slack 스레드에 기록한다.
+
+공개 문서에는 외부 매입처·판매처 이름, 상품·계정 식별자, 접속 주소·포트, 세션 값, 상태 파일 경로,
+인증정보와 실제 운영 기록을 포함하지 않는다.
 
 ### 4. 중복 실행과 부분 실패를 기본값으로 처리
 
