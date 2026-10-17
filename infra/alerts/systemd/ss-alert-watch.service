@@ -1,0 +1,6 @@
+[Unit]
+Description=Smartstore 운영 알림 전송(alerts.jsonl → automation webhook → team notification)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/smartstore-infra/bin/ss_alert_watch.py
